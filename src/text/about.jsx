@@ -27,20 +27,8 @@ const About = () => {
                         <p className="py-2">
                             I chose to undertake this project to 1. improve my javascript/react/git knowledge, and 2. to create a unique (at least I hope)
                             website to showcase my interests (of which you can read some of my more formalised projects using <span className="terminal-highlight">"ls"</span> and <span className="terminal-highlight">"read [filename]"</span>)
-                            and skills in a memorable way. As someone whos favourite thing isn't frontend design, I naturally spent too much time formatting the front end to look like a back end.
+                            and skills in a memorable way. As someone whos favourite thing isn't frontend design, I naturally spent too much time formatting the frontend to look like a backend.
                         </p>
-                        <br />
-                        <p className="py-2">
-                            Currently, I am enjoying learning more ahout web development as a full stack developer at a cybersecurity startup,
-                            and improving my knowledge of financials as Treasurer of the UQ Mathematics Student Society (UQ MSS).
-                        </p>
-                        <p className="py-2">
-                            In my free time I enjoy photography, bushwalking, reading, and losing at competitive video games
-                            (and playing with my dogs).
-                        </p>
-
-
-
                     </p>
                     <div id="portrait" className="w-[2000px] mt-5 md:mt-0 mb-5 md:mb-0 md:mr-10">
                         <label> Sesame and Nutmeg placeholder
@@ -48,6 +36,15 @@ const About = () => {
                         </label>
                     </div>
                 </div>
+                <br />
+                <p className="py-2">
+                    Currently, I am enjoying learning more ahout web development as a full stack developer at a cybersecurity startup,
+                    and improving my knowledge of financials as Treasurer of the UQ Mathematics Student Society (UQ MSS).
+                </p>
+                <p className="py-2">
+                    In my free time I enjoy photography, bushwalking, reading, and losing at competitive video games
+                    (and playing with my dogs).
+                </p>
                 <br />
 
                 <p className="py-4">
