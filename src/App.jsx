@@ -1,11 +1,20 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { bells } from "./blogs/bells";
+import React, { useRef, useState, useEffect, lazy, Suspense } from 'react';
 
-const files = { 'bells.txt': bells, 'blog1.txt': ["hello"] }
 
-const asciiLine = "-".repeat(27)
+const asciiLine = "-".repeat(27) // to make reading files nicer 
+const terminalText = "> user@jasperchong-terminal:~$ ";
+
+// lazy importing for speed
+const LazyPairTrading = () => lazy(() => import("./text/pairtrading"));
+const LazyBells = () => lazy(() => import("./text/bells"));
+
+
+const files = { 'bells.txt': LazyBells, 'pairtrading.txt': LazyPairTrading }
+
+
 
 // want to add extra commands like cv which can link to different pages
+// test more comments
 
 const responses = {
   "help": [
@@ -14,7 +23,9 @@ const responses = {
     "2. clear - Clear the terminal.",
     "3. ls - List the contents of the current directory.",
     "4. read [filename] - Display the contents of the specified text file.",
-    "5. echo [text] - Echo the text you provide."
+    "5. echo [text] - Echo the text you provide.",
+    "6. linkedin - Get my LinkedIn profile.",
+    "7. github - Get my GitHub profile.",
   ],
   "clear": "Terminal cleared.",
   "echo": (args) => args.join(' '), // Return the echoed text
@@ -22,24 +33,44 @@ const responses = {
   "read": (args) => {
     const filename = args[0]; // Get the filename from arguments
     if (files[filename]) {
-      return [asciiLine, ...files[filename], asciiLine]; // Return the contents if file exists
+      const LazyComponent = files[filename]()
+      return [<>
+        <div>{asciiLine}</div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <LazyComponent />
+        </Suspense>
+        <div>{asciiLine}</div>
+      </>]; // Return the contents if file exists
     }
     else if (files[filename + ".txt"]) {
-      return [asciiLine, ...files[filename + ".txt"], asciiLine]; // Return the contents if file exists
+      const LazyComponent = files[filename + ".txt"]();
+      return [<>
+        <div>{asciiLine}</div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <LazyComponent />
+        </Suspense>
+        <div>{asciiLine}</div>
+      </>]; // Return the contents if file exists
     }
     else {
-      return [`File not found: ${filename}`]; // Handle file not found
+      return [<div className='error'>File not found: {filename}</div>]; // Handle file not found
     }
   },
+  "linkedin": [<a target="_blank" href="https://www.linkedin.com/in/jasper-chong-062932276/?originalSubdomain=au" className="link">linkedin.com/jasperchong</a>],
+  "github": [<a target="_blank" href="  https://github.com/jasperchongcode" className="link">github.com/jasperchongcode</a>],
+
+  "eddy": [<img src="./public/ed.png" />]
+
 };
 
 function App() {
-  const terminalText = "> user@terminal-website:~$ ";
+
 
   // State to hold terminal output commands
   const [commands, setCommands] = useState([
-    ['> user@terminal-website:~$ Welcome to the interactive terminal', ""],
+    [`${terminalText}Welcome to the interactive terminal`, ""],
     ['Type a command and press Enter.', ""],
+    ['Type "help" to see the available commands.', ""],
   ]);
 
   // useRef hook to access the input field and output for scrolling
@@ -78,20 +109,17 @@ function App() {
         const command = commandParts[0];
         const args = commandParts.slice(1); // Get any arguments
 
-        if (command == "clear") {
+        if (command.toLowerCase() == "clear") {
           setCommands([])
         }
 
-        else if (responses[command]) {
-          const response = typeof responses[command] === 'function'
-            ? responses[command](args) // Call function if it's a dynamic response
-            : responses[command]; // Get static response
-
-          console.log(response)
+        else if (responses[command.toLowerCase()]) {
+          const response = typeof responses[command.toLowerCase()] === 'function'
+            ? responses[command.toLowerCase()](args) // Call function if it's a dynamic response
+            : responses[command.toLowerCase()]; // Get static response
 
           // If the response is an array, add each line separately
           if (Array.isArray(response)) {
-            console.log('response is array')
             setCommands(prevCommands => [
               ...prevCommands,
               ...response.map(line => [line, ""]), // Wrap each line in an array
@@ -107,7 +135,7 @@ function App() {
           // Handle unknown command
           setCommands(prevCommands => [
             ...prevCommands,
-            ["Command not found: ", userCommand]
+            [<span className="error">Command not found: </span>, userCommand]
           ]);
         }
 
@@ -141,11 +169,23 @@ function App() {
 
   return (
     <main className="p-6 h-screen flex flex-col justify-start">
+
       <div
         id="terminal-output"
         ref={outputRef}
         className="overflow-auto flex-grow mb-4"
       >
+        <span className='flex items-center'>
+          <pre>
+            {`     ██╗ █████╗ ███████╗██████╗ ███████╗██████╗      ██████╗██╗  ██╗ ██████╗ ███╗   ██╗ ██████╗ 
+     ██║██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗    ██╔════╝██║  ██║██╔═══██╗████╗  ██║██╔════╝ 
+     ██║███████║███████╗██████╔╝█████╗  ██████╔╝    ██║     ███████║██║   ██║██╔██╗ ██║██║  ███╗
+██   ██║██╔══██║╚════██║██╔═══╝ ██╔══╝  ██╔══██╗    ██║     ██╔══██║██║   ██║██║╚██╗██║██║   ██║
+╚█████╔╝██║  ██║███████║██║     ███████╗██║  ██║    ╚██████╗██║  ██║╚██████╔╝██║ ╚████║╚██████╔╝
+ ╚════╝ ╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝     ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ 
+                                                                                                `}
+          </pre>
+        </span>
         {commands.map((command, index) => (
           <p key={index}>
             {
