@@ -1,11 +1,13 @@
 import { ImageResponse } from '@vercel/og';
-import App from "../src/App"
+// import App from "../src/App"
 
 export default async function handler() {
     return new ImageResponse(
         (
             <>
-                <App />
+                <div>
+                    Hello world
+                </div>
             </>
         ),
         {
