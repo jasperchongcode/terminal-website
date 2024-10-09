@@ -79,15 +79,24 @@ function App() {
 
   // State to hold terminal output commands
   const [commands, setCommands] = useState([
-    [<span className='flex items-center'>
+    [<span className='flex flex-col md:flex-row'>
       <pre>
-        {`     ██╗ █████╗ ███████╗██████╗ ███████╗██████╗      ██████╗██╗  ██╗ ██████╗ ███╗   ██╗ ██████╗ 
-     ██║██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗    ██╔════╝██║  ██║██╔═══██╗████╗  ██║██╔════╝ 
-     ██║███████║███████╗██████╔╝█████╗  ██████╔╝    ██║     ███████║██║   ██║██╔██╗ ██║██║  ███╗
-██   ██║██╔══██║╚════██║██╔═══╝ ██╔══╝  ██╔══██╗    ██║     ██╔══██║██║   ██║██║╚██╗██║██║   ██║
-╚█████╔╝██║  ██║███████║██║     ███████╗██║  ██║    ╚██████╗██║  ██║╚██████╔╝██║ ╚████║╚██████╔╝
- ╚════╝ ╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝     ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ 
-                                                                                                `}
+        {`     ██╗ █████╗ ███████╗██████╗ ███████╗██████╗     
+     ██║██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗    
+     ██║███████║███████╗██████╔╝█████╗  ██████╔╝    
+██   ██║██╔══██║╚════██║██╔═══╝ ██╔══╝  ██╔══██╗    
+╚█████╔╝██║  ██║███████║██║     ███████╗██║  ██║    
+ ╚════╝ ╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝    
+                                                    `}
+      </pre>
+      <pre>
+        {` ██████╗██╗  ██╗ ██████╗ ███╗   ██╗ ██████╗ 
+██╔════╝██║  ██║██╔═══██╗████╗  ██║██╔════╝ 
+██║     ███████║██║   ██║██╔██╗ ██║██║  ███╗
+██║     ██╔══██║██║   ██║██║╚██╗██║██║   ██║
+╚██████╗██║  ██║╚██████╔╝██║ ╚████║╚██████╔╝
+ ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ 
+                                            `}
       </pre>
     </span>],
     [`${terminalText}Welcome to the JC terminal`, ""],
@@ -95,10 +104,9 @@ function App() {
     [<div className="font-bold">Type <span className='terminal-highlight'>"help"</span> to see the available commands.</div>, ""],
   ]);
 
-  // useRef hook to access the input field and output for scrolling
+  // useRef hook to access the input field for resizing 
   const inputRef = useRef(null);
-  const outputRef = useRef(null);
-  const cursorRef = useRef(null); // Create a ref for the cursor
+  const cursorRef = useRef(null); // Create a ref for the cursor for resizing
 
   // State to hold the current user input value
   const [currentInput, setCurrentInput] = useState('');
@@ -167,35 +175,23 @@ function App() {
     }
   };
 
-  // Automatically scroll to the bottom of the terminal output when commands update
-  useEffect(() => {
-    outputRef.current.scrollTop = outputRef.current.scrollHeight;
-  }, [commands]);
-
   // Effect to handle the input resizing
   useEffect(() => {
     resizeInput(); // Resize the input initially
   }, [currentInput]); // Re-run when currentInput changes
 
-  useEffect(() => {
-    const handleClick = () => {
-      inputRef.current.focus(); // Focus the input field when the document is clicked
-    };
+  const handleClick = (event) => {
 
-    document.addEventListener('click', handleClick);
+    inputRef.current.focus(); // Focus the input field when the document is clicked
+  };
 
-    return () => {
-      document.removeEventListener('click', handleClick); // Clean up event listener on unmount
-    };
-  }, []); // Empty dependency array to run on mount and unmount
 
   return (
     <main className="px-6 py-0 h-screen flex flex-col justify-start">
 
       <div
         id="terminal-output"
-        ref={outputRef}
-        className="overflow-auto flex-grow mb-4"
+        className="overflow-auto flex-grow mb-4 flex flex-col"
       >
 
         {commands.map((command, index) => (
@@ -211,7 +207,7 @@ function App() {
         ))}
 
         {/* Input Field as part of the terminal */}
-        <p className="flex items-center">
+        <p id="input-wrapper" className="flex items-center" onClick={handleClick}>
           <span className="mr-2">{terminalText}</span>
           <span className="relative">
             <input
@@ -231,6 +227,8 @@ function App() {
             <span ref={cursorRef} className="cursor absolute"></span>
           </span>
         </p>
+        {/* This is so you can click in the empty space below the input and auto focus on the input */}
+        <div id="empty-space" className="flex-grow" onClick={handleClick} />
 
       </div>
     </main>
