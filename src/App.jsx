@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect, lazy, Suspense } from 'react';
 
-
 const asciiLine = "-".repeat(27) // to make reading files nicer 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
