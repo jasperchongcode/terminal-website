@@ -8,11 +8,12 @@ const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the 
 const LazyPairTrading = () => lazy(() => import("./text/pairtrading"));
 const LazyLorem = () => lazy(() => import("./text/lorem"));
 const LazyLitClock = () => lazy(() => import("./text/litclock"));
+const LazyAbout = () => lazy(() => import("./text/about"));
 
 
 // files and a lazy loader promise for rendering
 // may be worth adding folders and things eventually as i write more
-const files = { 'lorem.txt': LazyLorem, 'pairtrading.txt': LazyPairTrading, 'litclock.txt': LazyLitClock }
+const files = { 'about.txt': LazyAbout, 'lorem.txt': LazyLorem, 'pairtrading.txt': LazyPairTrading, 'litclock.txt': LazyLitClock }
 
 
 // want to add extra commands like cv which can link to different pages
@@ -34,7 +35,7 @@ const responses = {
     <div>I recommend using the <span className='terminal-highlight'>"ls"</span> command to view the available files in the current directory.</div>,
     <div>You can then use the <span className='terminal-highlight'>"read [filename]"</span> command to read any of those files.</div>,
     "Commands are not case-sensitive, and you don't need to type the file extensions.",
-    "I hope you find the enjoy the site :)",
+    "I hope you enjoy the site :)",
     asciiLine
   ],
   "clear": "Terminal cleared.",
@@ -70,8 +71,8 @@ const responses = {
   "github": [<a target="_blank" href="https://github.com/jasperchongcode" className="link">github.com/jasperchongcode</a>],
   "email": [<a href="mailto: contact@jasperchong.com" className="link">contact@jasperchong.com</a>],
   "website": [<a href="https://jasperchong.com" className="link">jasperchong.com</a>],
-  "eddy": [<img src="https://i.ibb.co/6tMBMCT/eddy.jpg" alt="eddy" border="0" />],
-  "labradoodle": [<img src="https://i.ibb.co/BB87xxD/labradoodle.jpg" alt="labradoodle" border="0" />],
+  "eddy": [<img className="border-[#4AF626] border-4" src="https://i.ibb.co/6tMBMCT/eddy.jpg" alt="attractive man" border="0" />],
+  "labradoodle": [<img className="border-[#4AF626] border-4" src="https://i.ibb.co/BB87xxD/labradoodle.jpg" alt="Two labradoodles on a car" border="0" />],
 };
 
 function App() {
@@ -102,9 +103,8 @@ function App() {
     [<div className="font-bold">Type <span className='terminal-highlight'>"help"</span> to see the available commands.</div>, ""],
   ]);
 
-  // useRef hook to access the input field for resizing 
-  const inputRef = useRef(null);
-  const outputRef = useRef(null);
+  const inputRef = useRef(null);  // useRef hook to access the input field for resizing 
+  const outputRef = useRef(null); // for auto scroll 
   const cursorRef = useRef(null); // Create a ref for the cursor for resizing
 
   // State to hold the current user input value
