@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, lazy, Suspense } from 'react';
 
 
 const asciiLine = "-".repeat(27) // to make reading files nicer 
-const terminalText = "> user@jasperchong-terminal:~$ ";
+const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
 // lazy importing for speed
 const LazyPairTrading = () => lazy(() => import("./text/pairtrading"));
@@ -10,9 +10,9 @@ const LazyLorem = () => lazy(() => import("./text/lorem"));
 const LazyLitClock = () => lazy(() => import("./text/litclock"));
 
 
-
+// files and a lazy loader promise for rendering
+// may be worth adding folders and things eventually as i write more
 const files = { 'lorem.txt': LazyLorem, 'pairtrading.txt': LazyPairTrading, 'litclock.txt': LazyLitClock }
-
 
 
 // want to add extra commands like cv which can link to different pages
@@ -75,11 +75,9 @@ const responses = {
 };
 
 function App() {
-
-
   // State to hold terminal output commands
   const [commands, setCommands] = useState([
-    [<span className='flex flex-col md:flex-row'>
+    [<span className='flex flex-col md:flex-row pt-3'>
       <pre>
         {`     ██╗ █████╗ ███████╗██████╗ ███████╗██████╗     
      ██║██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗    
@@ -106,6 +104,7 @@ function App() {
 
   // useRef hook to access the input field for resizing 
   const inputRef = useRef(null);
+  const outputRef = useRef(null);
   const cursorRef = useRef(null); // Create a ref for the cursor for resizing
 
   // State to hold the current user input value
@@ -175,6 +174,11 @@ function App() {
     }
   };
 
+  // Auto scroll to bottom when commands updated
+  useEffect(() => {
+    outputRef.current.scrollTop = outputRef.current.scrollHeight
+  }, [commands]);
+
   // Effect to handle the input resizing
   useEffect(() => {
     resizeInput(); // Resize the input initially
@@ -191,6 +195,7 @@ function App() {
 
       <div
         id="terminal-output"
+        ref={outputRef}
         className="overflow-auto flex-grow mb-4 flex flex-col"
       >
 
