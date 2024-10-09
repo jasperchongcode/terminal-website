@@ -19,6 +19,10 @@
   @apply text-blue-400 underline;
 }
 
+.terminal-highlight {
+  @apply text-white;
+}
+
 
 .cursor {
   display: inline-block;

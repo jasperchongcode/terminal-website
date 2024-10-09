@@ -6,10 +6,12 @@ const terminalText = "> user@jasperchong-terminal:~$ ";
 
 // lazy importing for speed
 const LazyPairTrading = () => lazy(() => import("./text/pairtrading"));
-const LazyBells = () => lazy(() => import("./text/bells"));
+const LazyLorem = () => lazy(() => import("./text/lorem"));
+const LazyLitClock = () => lazy(() => import("./text/litclock"));
 
 
-const files = { 'bells.txt': LazyBells, 'pairtrading.txt': LazyPairTrading }
+
+const files = { 'lorem.txt': LazyLorem, 'pairtrading.txt': LazyPairTrading, 'litclock.txt': LazyLitClock }
 
 
 
@@ -17,15 +19,23 @@ const files = { 'bells.txt': LazyBells, 'pairtrading.txt': LazyPairTrading }
 // test more comments
 
 const responses = {
-  "help": [
+  "help": [asciiLine,
     "Available commands:",
     "1. help - Show this help message.",
     "2. clear - Clear the terminal.",
     "3. ls - List the contents of the current directory.",
     "4. read [filename] - Display the contents of the specified text file.",
-    "5. echo [text] - Echo the text you provide.",
-    "6. linkedin - Get my LinkedIn profile.",
-    "7. github - Get my GitHub profile.",
+    "5. linkedin - Get my LinkedIn profile.",
+    "6. github - Get my GitHub profile.",
+    "7. email - Get my email for any queries (please note this is forwarded to my main account).",
+    "8. website - Get my website (you're already here though!).",
+    "9. echo [text] - Echo the text you provide.",
+    asciiLine,
+    <div>I recommend using the <span className='terminal-highlight'>"ls"</span> command to view the available files in the current directory.</div>,
+    <div>You can then use the <span className='terminal-highlight'>"read [filename]"</span> command to read any of those files.</div>,
+    "Commands are not case-sensitive, and you don't need to type the file extensions.",
+    "I hope you find the enjoy the site :)",
+    asciiLine
   ],
   "clear": "Terminal cleared.",
   "echo": (args) => args.join(' '), // Return the echoed text
@@ -57,10 +67,11 @@ const responses = {
     }
   },
   "linkedin": [<a target="_blank" href="https://www.linkedin.com/in/jasper-chong-062932276/?originalSubdomain=au" className="link">linkedin.com/jasperchong</a>],
-  "github": [<a target="_blank" href="  https://github.com/jasperchongcode" className="link">github.com/jasperchongcode</a>],
-
-  "eddy": [<img src="./public/ed.png" />]
-
+  "github": [<a target="_blank" href="https://github.com/jasperchongcode" className="link">github.com/jasperchongcode</a>],
+  "email": [<a href="mailto: contact@jasperchong.com" className="link">contact@jasperchong.com</a>],
+  "website": [<a href="https://jasperchong.com" className="link">jasperchong.com</a>],
+  "eddy": [<img src="https://i.ibb.co/6tMBMCT/eddy.jpg" alt="eddy" border="0" />],
+  "labradoodle": [<img src="https://i.ibb.co/BB87xxD/labradoodle.jpg" alt="labradoodle" border="0" />],
 };
 
 function App() {
@@ -68,9 +79,20 @@ function App() {
 
   // State to hold terminal output commands
   const [commands, setCommands] = useState([
-    [`${terminalText}Welcome to the interactive terminal`, ""],
+    [<span className='flex items-center'>
+      <pre>
+        {`     ██╗ █████╗ ███████╗██████╗ ███████╗██████╗      ██████╗██╗  ██╗ ██████╗ ███╗   ██╗ ██████╗ 
+     ██║██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗    ██╔════╝██║  ██║██╔═══██╗████╗  ██║██╔════╝ 
+     ██║███████║███████╗██████╔╝█████╗  ██████╔╝    ██║     ███████║██║   ██║██╔██╗ ██║██║  ███╗
+██   ██║██╔══██║╚════██║██╔═══╝ ██╔══╝  ██╔══██╗    ██║     ██╔══██║██║   ██║██║╚██╗██║██║   ██║
+╚█████╔╝██║  ██║███████║██║     ███████╗██║  ██║    ╚██████╗██║  ██║╚██████╔╝██║ ╚████║╚██████╔╝
+ ╚════╝ ╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝     ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ 
+                                                                                                `}
+      </pre>
+    </span>],
+    [`${terminalText}Welcome to the JC terminal`, ""],
     ['Type a command and press Enter.', ""],
-    ['Type "help" to see the available commands.', ""],
+    [<div className="font-bold">Type <span className='terminal-highlight'>"help"</span> to see the available commands.</div>, ""],
   ]);
 
   // useRef hook to access the input field and output for scrolling
@@ -168,24 +190,14 @@ function App() {
   }, []); // Empty dependency array to run on mount and unmount
 
   return (
-    <main className="p-6 h-screen flex flex-col justify-start">
+    <main className="px-6 py-0 h-screen flex flex-col justify-start">
 
       <div
         id="terminal-output"
         ref={outputRef}
         className="overflow-auto flex-grow mb-4"
       >
-        <span className='flex items-center'>
-          <pre>
-            {`     ██╗ █████╗ ███████╗██████╗ ███████╗██████╗      ██████╗██╗  ██╗ ██████╗ ███╗   ██╗ ██████╗ 
-     ██║██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗    ██╔════╝██║  ██║██╔═══██╗████╗  ██║██╔════╝ 
-     ██║███████║███████╗██████╔╝█████╗  ██████╔╝    ██║     ███████║██║   ██║██╔██╗ ██║██║  ███╗
-██   ██║██╔══██║╚════██║██╔═══╝ ██╔══╝  ██╔══██╗    ██║     ██╔══██║██║   ██║██║╚██╗██║██║   ██║
-╚█████╔╝██║  ██║███████║██║     ███████╗██║  ██║    ╚██████╗██║  ██║╚██████╔╝██║ ╚████║╚██████╔╝
- ╚════╝ ╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝     ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ 
-                                                                                                `}
-          </pre>
-        </span>
+
         {commands.map((command, index) => (
           <p key={index}>
             {
@@ -215,7 +227,7 @@ function App() {
               ref={inputRef}
               autoFocus
             />
-            {/* Cursor that appears just after the input */}
+            {/* Cursor */}
             <span ref={cursorRef} className="cursor absolute"></span>
           </span>
         </p>
