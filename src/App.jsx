@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import Spinner from './components/spinner';
 
-const asciiLine = "-".repeat(27) // to make reading files nicer 
+const asciiLine = <hr className='border-terminal-green my-2' />//"-".repeat(27) // to make reading files nicer 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
 // lazy importing for speed
@@ -84,8 +84,8 @@ const responses = {
   "github": [<a target="_blank" href="https://github.com/jasperchongcode" className="link">github.com/jasperchongcode</a>],
   "email": [<a href="mailto: contact@jasperchong.com" className="link">contact@jasperchong.com</a>],
   "website": [<a href="https://jasperchong.com" className="link">jasperchong.com</a>],
-  "eddy": [<img className="border-[#4AF626] border-4" src="https://i.ibb.co/6tMBMCT/eddy.jpg" alt="attractive man" border="0" />],
-  "labradoodle": [<img className="border-[#4AF626] border-4" src="https://i.ibb.co/BB87xxD/labradoodle.jpg" alt="Two labradoodles on a car" border="0" />],
+  "eddy": [<img className="image" src="https://i.ibb.co/6tMBMCT/eddy.jpg" alt="attractive man" border="0" />],
+  "labradoodle": [<img className="image" src="https://i.ibb.co/BB87xxD/labradoodle.jpg" alt="Two labradoodles on a car" border="0" />],
 };
 
 function App() {

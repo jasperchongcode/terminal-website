@@ -32,7 +32,7 @@ const About = () => {
                     </p>
                     <div id="portrait" className="w-[350px] mt-5 md:mt-0 mb-5 md:mb-0 md:mr-10 md:w-[2000px]">
                         <label> Sesame and Nutmeg placeholder
-                            <img className="border-terminal-green border-4" src="https://i.ibb.co/BB87xxD/labradoodle.jpg" alt="labradoodle" />
+                            <img className="image" src="https://i.ibb.co/BB87xxD/labradoodle.jpg" alt="labradoodle" />
                         </label>
                     </div>
                 </div>
