@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, lazy, Suspense } from 'react';
+import Spinner from './components/spinner';
 
 const asciiLine = "-".repeat(27) // to make reading files nicer 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
@@ -9,7 +10,7 @@ const LazyLorem = () => lazy(() => import("./text/lorem"));
 const LazyLitClock = () => lazy(() => import("./text/litclock"));
 const LazyAbout = () => lazy(() => import("./text/about"));
 
-const version = "1.1.0"
+const version = "1.1.1"
 
 // files and a lazy loader promise for rendering
 // may be worth adding folders and things eventually as i write more
@@ -34,7 +35,7 @@ const responses = {
     "Available commands:",
     "1. help - Show this help message.",
     "2. clear - Fully clear terminal.",
-    "3. r - Reload the page to initial view.",
+    "3. r - Reload page to initial view.",
     "4. ls - List the contents of the current directory.",
     "5. read [filename] - Display the contents of the specified text file.",
     "6. linkedin - Get my LinkedIn profile.",
@@ -59,7 +60,7 @@ const responses = {
       const LazyComponent = files[filename]()
       return [<>
         <div>{asciiLine}</div>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<span><Spinner /> Loading...</span>}>
           <LazyComponent />
         </Suspense>
         <div>{asciiLine}</div>
@@ -69,7 +70,7 @@ const responses = {
       const LazyComponent = files[filename + ".txt"]();
       return [<>
         <div>{asciiLine}</div>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<span><Spinner /> Loading...</span>}>
           <LazyComponent />
         </Suspense>
         <div>{asciiLine}</div>
@@ -219,7 +220,6 @@ function App() {
 
   return (
     <main className="px-6 py-0 h-screen flex flex-col justify-start">
-
       <div
         id="terminal-output"
         ref={outputRef}
