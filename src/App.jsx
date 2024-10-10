@@ -9,11 +9,22 @@ const LazyLorem = () => lazy(() => import("./text/lorem"));
 const LazyLitClock = () => lazy(() => import("./text/litclock"));
 const LazyAbout = () => lazy(() => import("./text/about"));
 
+const version = "1.1.0"
 
 // files and a lazy loader promise for rendering
 // may be worth adding folders and things eventually as i write more
 const files = { 'about.txt': LazyAbout, 'lorem.txt': LazyLorem, 'pairtrading.txt': LazyPairTrading, 'litclock.txt': LazyLitClock }
 
+// to display welcome message 
+const currentDateTime = new Date().toLocaleString([], {
+  weekday: 'short',
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit'
+});
 
 // want to add extra commands like cv which can link to different pages
 // test more comments
@@ -22,14 +33,15 @@ const responses = {
   "help": [asciiLine,
     "Available commands:",
     "1. help - Show this help message.",
-    "2. clear - Clear the terminal.",
-    "3. ls - List the contents of the current directory.",
-    "4. read [filename] - Display the contents of the specified text file.",
-    "5. linkedin - Get my LinkedIn profile.",
-    "6. github - Get my GitHub profile.",
-    "7. email - Get my email for any queries (please note this is forwarded to my main account).",
-    "8. website - Get my website (you're already here though!).",
-    "9. echo [text] - Echo the text you provide.",
+    "2. clear - Fully clear terminal.",
+    "3. r - Reload the page to initial view.",
+    "4. ls - List the contents of the current directory.",
+    "5. read [filename] - Display the contents of the specified text file.",
+    "6. linkedin - Get my LinkedIn profile.",
+    "7. github - Get my GitHub profile.",
+    "8. email - Get my email for any queries (please note this is forwarded to my main account).",
+    "9. website - Get my website (you're already here though!).",
+    "10. echo [text] - Echo the text you provide.",
     asciiLine,
     <div>I recommend using the <span className='terminal-highlight'>"ls"</span> command to view the available files in the current directory.</div>,
     <div>You can then use the <span className='terminal-highlight'>"read [filename]"</span> command to read any of those files.</div>,
@@ -38,6 +50,7 @@ const responses = {
     asciiLine
   ],
   "clear": "Terminal cleared.",
+  "r": "Terminal reloaded.",
   "echo": (args) => args.join(' '), // Return the echoed text
   "ls": () => Object.keys(files), // List files in the home directory
   "read": (args) => {
@@ -75,10 +88,12 @@ const responses = {
 };
 
 function App() {
+
+
   // State to hold terminal output commands
   const [commands, setCommands] = useState([
     [<span className='flex flex-col md:flex-row pt-3'>
-      <pre>
+      <pre className='text-sm md:text-base'>
         {`     ██╗ █████╗ ███████╗██████╗ ███████╗██████╗     
      ██║██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗    
      ██║███████║███████╗██████╔╝█████╗  ██████╔╝    
@@ -87,17 +102,26 @@ function App() {
  ╚════╝ ╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝    
                                                     `}
       </pre>
-      <pre>
-        {` ██████╗██╗  ██╗ ██████╗ ███╗   ██╗ ██████╗ 
+      <span className='flex flex-row'>
+        <pre className='text-sm md:text-base'>
+          {` ██████╗██╗  ██╗ ██████╗ ███╗   ██╗ ██████╗ 
 ██╔════╝██║  ██║██╔═══██╗████╗  ██║██╔════╝ 
 ██║     ███████║██║   ██║██╔██╗ ██║██║  ███╗
 ██║     ██╔══██║██║   ██║██║╚██╗██║██║   ██║
 ╚██████╗██║  ██║╚██████╔╝██║ ╚████║╚██████╔╝
  ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ 
                                             `}
-      </pre>
+        </pre>
+        <pre className='text-sm md:text-base typing-text font-bold'>{`
+      
+      
+      
+      
+ v${version}`}</pre>
+      </span>
     </span>],
     [`${terminalText}Welcome to the JC terminal`, ""],
+    [<p>{`Session start time: ${currentDateTime}`}</p>],
     ['Type a command and press Enter.', ""],
     [<div className="font-bold">Type <span className='terminal-highlight'>"help"</span> to see the available commands.</div>, ""],
   ]);
@@ -139,6 +163,10 @@ function App() {
 
         if (command.toLowerCase() == "clear") {
           setCommands([])
+        }
+
+        else if (command.toLowerCase() == "r") {
+          location.reload()
         }
 
         else if (responses[command.toLowerCase()]) {
