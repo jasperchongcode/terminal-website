@@ -2,7 +2,7 @@ const About = () => {
     return (
         <>
             <div className="py-2">
-                <h1 className="font-bold text-lg">Hi There!</h1>
+                <h1 className="font-bold text-base md:text-lg">Hi There!</h1>
                 <div className="flex flex-col md:flex-row">
                     <p className="md:mr-5">
                         <p className="py-2">
@@ -30,9 +30,9 @@ const About = () => {
                             and skills in a memorable way. As someone whos favourite thing isn't frontend design, I naturally spent too much time formatting the frontend to look like a backend.
                         </p>
                     </p>
-                    <div id="portrait" className="w-[2000px] mt-5 md:mt-0 mb-5 md:mb-0 md:mr-10">
+                    <div id="portrait" className="w-[350px] mt-5 md:mt-0 mb-5 md:mb-0 md:mr-10 md:w-[2000px]">
                         <label> Sesame and Nutmeg placeholder
-                            <img className="border-terminal-green border-4" src="https://i.ibb.co/BB87xxD/labradoodle.jpg" alt="labradoodle" width="600px" />
+                            <img className="border-terminal-green border-4" src="https://i.ibb.co/BB87xxD/labradoodle.jpg" alt="labradoodle" />
                         </label>
                     </div>
                 </div>

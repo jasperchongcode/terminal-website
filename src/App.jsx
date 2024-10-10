@@ -118,7 +118,7 @@ function App() {
       
       
       
- v${version}`}</pre>
+v${version}`}</pre>
       </span>
     </span>],
     [`${terminalText}Welcome to the JC terminal`, ""],

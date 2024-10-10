@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 * {
-  @apply bg-black text-terminal-green font-terminal;
+  @apply bg-black text-terminal-green font-terminal text-sm md:text-base;
 }
 
 .typing-text {
