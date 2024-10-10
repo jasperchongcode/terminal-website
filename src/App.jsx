@@ -10,7 +10,7 @@ const LazyLorem = () => lazy(() => import("./text/lorem"));
 const LazyLitClock = () => lazy(() => import("./text/litclock"));
 const LazyAbout = () => lazy(() => import("./text/about"));
 
-const version = "1.1.1"
+const version = "1.1.2"
 
 // files and a lazy loader promise for rendering
 // may be worth adding folders and things eventually as i write more
