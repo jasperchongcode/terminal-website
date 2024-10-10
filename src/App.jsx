@@ -1,6 +1,9 @@
 import React, { useRef, useState, useEffect, lazy, Suspense } from 'react';
-import Spinner from './components/spinner';
+import { Spinner } from './components';
+import { eddy, labradoodle } from "./assets"
 
+//probably add 0.1.0 for a blog/page/big command, 0.0.1 for a noticeable chaneg, 1.0.0 for a major overhaul
+const version = "1.1.3"
 const asciiLine = <hr className='border-terminal-green my-2' />//"-".repeat(27) // to make reading files nicer 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
@@ -10,7 +13,6 @@ const LazyLorem = () => lazy(() => import("./text/lorem"));
 const LazyLitClock = () => lazy(() => import("./text/litclock"));
 const LazyAbout = () => lazy(() => import("./text/about"));
 
-const version = "1.1.2"
 
 // files and a lazy loader promise for rendering
 // may be worth adding folders and things eventually as i write more
@@ -84,8 +86,9 @@ const responses = {
   "github": [<a target="_blank" href="https://github.com/jasperchongcode" className="link">github.com/jasperchongcode</a>],
   "email": [<a href="mailto: contact@jasperchong.com" className="link">contact@jasperchong.com</a>],
   "website": [<a href="https://jasperchong.com" className="link">jasperchong.com</a>],
-  "eddy": [<img className="image" src="https://i.ibb.co/6tMBMCT/eddy.jpg" alt="attractive man" border="0" />],
-  "labradoodle": [<img className="image" src="https://i.ibb.co/BB87xxD/labradoodle.jpg" alt="Two labradoodles on a car" border="0" />],
+  "spotify": [<a target="_blank" href="https://open.spotify.com/user/7mqmetexug75muj9bosr7cd40?si=0f1f1ecfd5e84b4f&nd=1&dlsi=c73852fab98749db" className="link">spotify.com/jasperchong</a>],
+  "eddy": [<img className="image" src={eddy} alt="attractive man" border="0" />],
+  "labradoodle": [<img className="image" src={labradoodle} alt="Two labradoodles on a car" border="0" />],
 };
 
 function App() {
@@ -219,7 +222,7 @@ v${version}`}</pre>
 
 
   return (
-    <main className="px-6 py-0 h-screen flex flex-col justify-start">
+    <main className="px-6 py-2 h-screen flex flex-col justify-start">
       <div
         id="terminal-output"
         ref={outputRef}
