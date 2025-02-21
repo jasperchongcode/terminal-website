@@ -3,7 +3,7 @@ import { Spinner } from './components';
 import { eddy, labradoodle } from "./assets"
 
 //probably add 0.1.0 for a blog/page/big command, 0.0.1 for a noticeable chaneg, 1.0.0 for a major overhaul
-const version = "1.1.3"
+const version = "1.2.0"
 const asciiLine = <hr className='border-terminal-green my-2' />//"-".repeat(27) // to make reading files nicer 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
@@ -12,11 +12,19 @@ const LazyPairTrading = () => lazy(() => import("./pages/pairtrading"));
 const LazyLorem = () => lazy(() => import("./pages/lorem"));
 const LazyLitClock = () => lazy(() => import("./pages/litclock"));
 const LazyAbout = () => lazy(() => import("./pages/about"));
+const LazySummerResearch = () => lazy(() => import("./pages/summerresearch"));
+
 
 
 // files and a lazy loader promise for rendering
 // may be worth adding folders and things eventually as i write more
-const files = { 'about.txt': LazyAbout, 'lorem.txt': LazyLorem, 'pairtrading.txt': LazyPairTrading, 'litclock.txt': LazyLitClock }
+const files = {
+  'about.txt': LazyAbout,
+  'lorem.txt': LazyLorem,
+  'pairtrading.txt': LazyPairTrading,
+  'litclock.txt': LazyLitClock,
+  'summerresearch.txt': LazySummerResearch,
+}
 
 // to display welcome message 
 const currentDateTime = new Date().toLocaleString([], {
@@ -82,7 +90,7 @@ const responses = {
       return [<div className='error'>File not found: {filename}</div>]; // Handle file not found
     }
   },
-  "linkedin": [<a target="_blank" href="https://www.linkedin.com/in/jasper-chong-062932276/?originalSubdomain=au" className="link">linkedin.com/jasperchong</a>],
+  "linkedin": [<a target="_blank" href="https://www.linkedin.com/in/jasper-chong-012345678910111213/" className="link">linkedin.com/jasperchong</a>],
   "github": [<a target="_blank" href="https://github.com/jasperchongcode" className="link">github.com/jasperchongcode</a>],
   "email": [<a href="mailto: contact@jasperchong.com" className="link">contact@jasperchong.com</a>],
   "website": [<a href="https://jasperchong.com" className="link">jasperchong.com</a>],
