@@ -8,10 +8,10 @@ const asciiLine = <hr className='border-terminal-green my-2' />//"-".repeat(27) 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
 // lazy importing for speed
-const LazyPairTrading = () => lazy(() => import("./text/pairtrading"));
-const LazyLorem = () => lazy(() => import("./text/lorem"));
-const LazyLitClock = () => lazy(() => import("./text/litclock"));
-const LazyAbout = () => lazy(() => import("./text/about"));
+const LazyPairTrading = () => lazy(() => import("./pages/pairtrading"));
+const LazyLorem = () => lazy(() => import("./pages/lorem"));
+const LazyLitClock = () => lazy(() => import("./pages/litclock"));
+const LazyAbout = () => lazy(() => import("./pages/about"));
 
 
 // files and a lazy loader promise for rendering
