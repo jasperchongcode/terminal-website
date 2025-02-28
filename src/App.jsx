@@ -218,7 +218,7 @@ v${version}`}</pre>
       event.preventDefault(); // Prevent default tab behavior (moving focus)
 
       const inputParts = currentInput.trim().split(" ");
-      if (inputParts.length === 1) {
+      if (inputParts.length === 1 && currentInput.trim()) {
         // Autocomplete commands
         const matches = Object.keys(responses).filter(cmd => cmd.startsWith(inputParts[0].toLowerCase()));
         if (matches.length === 1) {
@@ -228,7 +228,7 @@ v${version}`}</pre>
 
         }
       }
-      else if (inputParts.length === 2) {
+      else if (inputParts.length === 2 && currentInput.trim()) {
         // Autocomplete filenames
         const matches = Object.keys(files).filter(file => file.startsWith(inputParts[1].toLowerCase()));
         if (matches.length === 1) {
