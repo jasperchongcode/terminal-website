@@ -3,7 +3,7 @@ import { Spinner } from './components';
 import { eddy, labradoodle } from "./assets"
 
 //probably add 0.1.0 for a blog/page/big command, 0.0.1 for a noticeable chaneg, 1.0.0 for a major overhaul
-const version = "1.2.0"
+const version = "1.2.1"
 const asciiLine = <hr className='border-terminal-green my-2' />//"-".repeat(27) // to make reading files nicer 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
@@ -159,6 +159,8 @@ v${version}`}</pre>
   // Function to handle the Enter key press
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
+      setRecommendations(prev => [])
+
       const userCommand = currentInput.trim(); // Get the input text
 
       if (userCommand !== "") {
@@ -213,6 +215,55 @@ v${version}`}</pre>
     }
   };
 
+  const [recommendations, setRecommendations] = useState([])
+
+  const currentInputRef = useRef(currentInput);
+
+  useEffect(() => {
+    currentInputRef.current = currentInput; // Always keep ref updated
+  }, [currentInput]);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.keyCode === 9) { // Tab key
+      e.preventDefault();
+      setRecommendations(prev => [])
+
+      const inputParts = currentInputRef.current.trim().split(" ");
+      console.log("Current Input Parts:", inputParts);
+
+      if (responses[inputParts[0].toLowerCase()]) {
+        if (inputParts[1]) {
+          const recommendations = Object.keys(files).filter(filename =>
+            filename.startsWith(inputParts[1].toLowerCase())
+          );
+
+          if (recommendations.length === 1) {
+            setCurrentInput(`${inputParts[0]} ${recommendations[0]}`);
+          } else if (recommendations.length > 1) {
+            console.log("Multiple matches:", recommendations);
+            setRecommendations(prev => recommendations)
+          }
+        }
+      } else {
+        const recommendations = Object.keys(responses).filter(command =>
+          command.startsWith(inputParts[0].toLowerCase())
+        );
+
+        if (recommendations.length === 1) {
+          setCurrentInput(recommendations[0]);
+        } else if (recommendations.length > 1) {
+          console.log("Multiple matches:", recommendations);
+          setRecommendations(prev => recommendations)
+        }
+      }
+    }
+  });
+
+
+  useEffect(() => {
+    console.log(`Current input changed: ${currentInput}`)
+  }, [currentInput])
+
   // Auto scroll to bottom when commands updated
   useEffect(() => {
     outputRef.current.scrollTop = outputRef.current.scrollHeight
@@ -259,7 +310,8 @@ v${version}`}</pre>
               className="typing-input bg-transparent outline-none typing-text w-auto min-w-[1rem] flex-grow caret-transparent"
               value={currentInput}
               onChange={(e) => {
-                setCurrentInput(e.target.value);
+                console.log("setting current input to", e.target.value)
+                setCurrentInput(prev => e.target.value);
                 resizeInput(); // Resize input on change
               }}
               onKeyDown={handleKeyPress}
@@ -269,6 +321,9 @@ v${version}`}</pre>
             {/* Cursor */}
             <span ref={cursorRef} className="cursor absolute"></span>
           </span>
+        </p>
+        <p id="recommendations" className='flex overflow-auto flex-grow mb-4 flex-wrap gap-10'>
+          {recommendations.map((recommendation, id) => <div id="id">{recommendation}</div>)}
         </p>
         {/* This is so you can click in the empty space below the input and auto focus on the input */}
         <div id="empty-space" className="flex-grow" onClick={handleClick} />
