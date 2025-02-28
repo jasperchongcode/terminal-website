@@ -213,6 +213,31 @@ v${version}`}</pre>
         setCurrentInput('');
       }
     }
+
+    else if (event.key === "Tab") {
+      event.preventDefault(); // Prevent default tab behavior (moving focus)
+
+      const inputParts = currentInput.trim().split(" ");
+      if (inputParts.length === 1) {
+        // Autocomplete commands
+        const matches = Object.keys(responses).filter(cmd => cmd.startsWith(inputParts[0].toLowerCase()));
+        if (matches.length === 1) {
+          setCurrentInput(matches[0]); // Autofill if only one match
+        } else if (matches.length > 1) {
+          setRecommendations(prev => matches)
+
+        }
+      }
+      else if (inputParts.length === 2) {
+        // Autocomplete filenames
+        const matches = Object.keys(files).filter(file => file.startsWith(inputParts[1].toLowerCase()));
+        if (matches.length === 1) {
+          setCurrentInput(`${inputParts[0]} ${matches[0]}`);
+        } else if (matches.length > 1) {
+          setRecommendations(prev => matches)
+        }
+      }
+    }
   };
 
   const [recommendations, setRecommendations] = useState([])
@@ -222,43 +247,6 @@ v${version}`}</pre>
   useEffect(() => {
     currentInputRef.current = currentInput; // Always keep ref updated
   }, [currentInput]);
-
-  document.addEventListener('keydown', function (e) {
-    if (e.keyCode === 9) { // Tab key
-      e.preventDefault();
-      setRecommendations(prev => [])
-
-      const inputParts = currentInputRef.current.trim().split(" ");
-      console.log("Current Input Parts:", inputParts);
-
-      if (responses[inputParts[0].toLowerCase()]) {
-        if (inputParts[1]) {
-          const recommendations = Object.keys(files).filter(filename =>
-            filename.startsWith(inputParts[1].toLowerCase())
-          );
-
-          if (recommendations.length === 1) {
-            setCurrentInput(`${inputParts[0]} ${recommendations[0]}`);
-          } else if (recommendations.length > 1) {
-            console.log("Multiple matches:", recommendations);
-            setRecommendations(prev => recommendations)
-          }
-        }
-      } else {
-        const recommendations = Object.keys(responses).filter(command =>
-          command.startsWith(inputParts[0].toLowerCase())
-        );
-
-        if (recommendations.length === 1) {
-          setCurrentInput(recommendations[0]);
-        } else if (recommendations.length > 1) {
-          console.log("Multiple matches:", recommendations);
-          setRecommendations(prev => recommendations)
-        }
-      }
-    }
-  });
-
 
   useEffect(() => {
     console.log(`Current input changed: ${currentInput}`)
@@ -322,7 +310,7 @@ v${version}`}</pre>
             <span ref={cursorRef} className="cursor absolute"></span>
           </span>
         </p>
-        <p id="recommendations" className='flex overflow-auto flex-grow mb-4 flex-wrap gap-10'>
+        <p id="recommendations" className='grid grid-cols-1'>
           {recommendations.map((recommendation, id) => <div id="id">{recommendation}</div>)}
         </p>
         {/* This is so you can click in the empty space below the input and auto focus on the input */}
