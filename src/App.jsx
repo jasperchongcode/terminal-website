@@ -242,12 +242,6 @@ v${version}`}</pre>
 
   const [recommendations, setRecommendations] = useState([])
 
-  const currentInputRef = useRef(currentInput);
-
-  useEffect(() => {
-    currentInputRef.current = currentInput; // Always keep ref updated
-  }, [currentInput]);
-
   useEffect(() => {
     console.log(`Current input changed: ${currentInput}`)
   }, [currentInput])
