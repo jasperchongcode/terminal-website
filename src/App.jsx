@@ -242,10 +242,6 @@ v${version}`}</pre>
 
   const [recommendations, setRecommendations] = useState([])
 
-  useEffect(() => {
-    console.log(`Current input changed: ${currentInput}`)
-  }, [currentInput])
-
   // Auto scroll to bottom when commands updated
   useEffect(() => {
     outputRef.current.scrollTop = outputRef.current.scrollHeight
