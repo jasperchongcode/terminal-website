@@ -8,17 +8,17 @@ const About = () => {
                 <div className="flex flex-col md:flex-row">
                     <p className="md:mr-5">
                         <p className="py-2">
-                            I'm Jasper, a first year student at UQ studying a bachelor of Engineering and Mathematics,
+                            I'm Jasper, a second year student at UQ studying a bachelor of Engineering and Mathematics,
                             hoping to specialise in Software Engineering and major in statistics.
                         </p>
                         <br />
                         <p className="py-2">
                             My current areas of interest are in the overlap of mathematical modelling and computer programming,
-                            or data science. I love how much practicality it has in such a wide variety of problem areas. With my (first year)
-                            strong points being statistics (with a particular interest in copulas) and python in programming.
+                            or data science. I love how much practicality it has in such a wide variety of problem areas. With my
+                            strong points being statistics (with a particular interest in copulas) and python for data science.
                         </p>
                         <p className="py-2 p">
-                            Within python I have made small projects with a variety of data-sciencey libraries, such as (in rough order from most to least knowledge): numpy, pandas, matplotlib, pyvinecopulib, statsmodels, scikit-learn, pytorch, tensorflow,
+                            Within python I have made small projects with a variety of data-sciencey libraries, such as (in rough order from most to least knowledge): numpy, pandas, matplotlib, pytorch, pyvinecopulib, statsmodels, scikit-learn, tensorflow,
                             NLTK, beautiful-soup.
 
                         </p>
@@ -40,11 +40,11 @@ const About = () => {
                 </div>
                 <br />
                 <p className="py-2">
-                    Currently, I am enjoying learning more ahout web development as a full stack developer at a cybersecurity startup,
+                    Currently, I am enjoying learning more ahout AI frameworks (RAG, Langchain, etc.) and web development as a full stack developer at a cybersecurity startup,
                     and improving my knowledge of financials as Treasurer of the UQ Mathematics Student Society (UQ MSS).
                 </p>
                 <p className="py-2">
-                    In my free time I enjoy photography, bushwalking, reading, and losing at competitive video games
+                    In my free time I enjoy photography, digital art, bushwalking, reading, and losing at competitive video games
                     (and playing with my dogs).
                 </p>
                 <br />
@@ -54,7 +54,7 @@ const About = () => {
                     I would love to connect with you on linkedin (e.g. <span className="terminal-highlight">"linkedin"</span>) or otherwise to have a chat. Thanks for reading all of this!
                 </p>
 
-                <p className="pt-3 text-sm">*P.S. you can use <span className="terminal-highlight">"help"</span> to see a list of commands (not including some Easter eggs! (like labradoodle)).</p>
+                <p className="pt-3 text-sm">*P.S. you can use <span className="terminal-highlight">"help"</span> to see a list of commands (not including some Easter eggs!).</p>
             </div>
         </>
     );
