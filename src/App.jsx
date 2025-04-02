@@ -213,7 +213,7 @@ v${version}`}</pre>
         setCurrentInput('');
       }
     }
-
+    // for tab autofill
     else if (event.key === "Tab") {
       event.preventDefault(); // Prevent default tab behavior (moving focus)
 
