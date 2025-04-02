@@ -319,8 +319,7 @@ v${version}`}</pre>
                 resizeInput(); // Resize input on change
               }}
               onKeyDown={handleKeyPress}
-              // onKeyUp={resizeInput}
-              onClick={resizeInput}
+              onClick={resizeInput} // for handling moving cursor when clicking middle of string
               ref={inputRef}
               autoFocus
             />
