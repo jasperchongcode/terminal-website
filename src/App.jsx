@@ -3,7 +3,7 @@ import { Spinner } from './components';
 import { eddy, labradoodle } from "./assets"
 
 //probably add 0.1.0 for a blog/page/big command, 0.0.1 for a noticeable chaneg, 1.0.0 for a major overhaul
-const version = "1.2.2"
+const version = "1.2.3"
 const asciiLine = <hr className='border-terminal-green my-2' />//"-".repeat(27) // to make reading files nicer 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
@@ -101,7 +101,8 @@ const responses = {
 
 function App() {
 
-
+  // If the cursor is blinking
+  const [isBlinking, setIsBlinking] = useState(true);
   // State to hold terminal output commands
   const [commands, setCommands] = useState([
     [<span className='flex flex-col md:flex-row pt-3'>
@@ -142,6 +143,14 @@ v${version}`}</pre>
   const outputRef = useRef(null); // for auto scroll 
   const cursorRef = useRef(null); // Create a ref for the cursor for resizing
 
+  useEffect(() => {
+    const postition = inputRef.current.selectionStart;
+    console.log("Selection:", postition)
+  }, inputRef.selectionStart)
+
+
+
+
   // State to hold the current user input value
   const [currentInput, setCurrentInput] = useState('');
 
@@ -150,14 +159,31 @@ v${version}`}</pre>
     const input = inputRef.current;
     const cursor = cursorRef.current;
 
+
     if (input && cursor) {
+      console.log("CALLED with", input.selectionStart, input.value.length + 1)
       input.style.width = `${input.value.length + 1}ch`; // Add 1 for padding
-      cursor.style.left = `${input.value.length}ch`; // Cursor to the right of the text
+
+      // cursor.style.left = `${input.value.length}ch`; // Cursor to the right of the text
+      cursor.style.left = `${input.selectionStart}ch`; // Cursor to the right of the text
+      // check if needs to blink or not
+      // if (input.selectionStart == input.value.length) {
+      //   setIsBlinking(false)
+
+      // }
+
+      setIsBlinking(false);
+      setTimeout(() => setIsBlinking(true), 1000)
+
+
     }
   };
 
   // Function to handle the Enter key press
   const handleKeyPress = (event) => {
+    // Resize the input (including moving the cursor)
+    setTimeout(() => resizeInput(), 0); // small timeout is used for making sure selection location is updated
+
     if (event.key === 'Enter') {
       setRecommendations(prev => [])
 
@@ -247,10 +273,10 @@ v${version}`}</pre>
     outputRef.current.scrollTop = outputRef.current.scrollHeight
   }, [commands]);
 
-  // Effect to handle the input resizing
+  // // Effect to handle the input resizing
   useEffect(() => {
     resizeInput(); // Resize the input initially
-  }, [currentInput]); // Re-run when currentInput changes
+  }, []); // Re-run when currentInput changes
 
   const handleClick = (event) => {
 
@@ -293,11 +319,13 @@ v${version}`}</pre>
                 resizeInput(); // Resize input on change
               }}
               onKeyDown={handleKeyPress}
+              // onKeyUp={resizeInput}
+              onClick={resizeInput}
               ref={inputRef}
               autoFocus
             />
             {/* Cursor */}
-            <span ref={cursorRef} className="cursor absolute"></span>
+            <span ref={cursorRef} className={`cursor absolute ${isBlinking ? "cursor-animation" : ""}`}></span>
           </span>
         </p>
         <p id="recommendations" className='grid grid-cols-1'>

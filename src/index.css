@@ -29,7 +29,11 @@
   width: 10px;
   height: 20px;
   @apply bg-terminal-green;
-  animation: blink 1s infinite;
+  
+}
+
+.cursor-animation {
+  animation: blink 0.7s infinite;
 }
 
 @keyframes blink {
