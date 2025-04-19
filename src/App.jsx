@@ -3,7 +3,7 @@ import { Spinner } from './components';
 import { eddy, labradoodle } from "./assets"
 
 //probably add 0.1.0 for a blog/page/big command, 0.0.1 for a noticeable chaneg, 1.0.0 for a major overhaul
-const version = "1.2.3"
+const version = "1.3.0"
 const asciiLine = <hr className='border-terminal-green my-2' />//"-".repeat(27) // to make reading files nicer 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
@@ -13,6 +13,8 @@ const LazyLorem = () => lazy(() => import("./pages/lorem"));
 const LazyLitClock = () => lazy(() => import("./pages/litclock"));
 const LazyAbout = () => lazy(() => import("./pages/about"));
 const LazySummerResearch = () => lazy(() => import("./pages/summerresearch"));
+const LazyDepthDetection = () => lazy(() => import("./pages/depthdetection"));
+
 
 
 
@@ -24,6 +26,7 @@ const files = {
   'pairtrading.txt': LazyPairTrading,
   'litclock.txt': LazyLitClock,
   'summerresearch.txt': LazySummerResearch,
+  'aidepthdetection.txt': LazyDepthDetection,
 }
 
 // to display welcome message 
