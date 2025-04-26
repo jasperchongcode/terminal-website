@@ -43,7 +43,11 @@ const DiffuserDrawing = () => {
 
 
                 </p>
-
+                <p>
+                    Overall was really happy with how this research project turned out, despite my joking applications I think this could have some genuine use cases with improving
+                    AI augemnation of images, especially with use of stronger and more fine tuned models (e.g. with LoRa, DreamBooth, etc.), as being able to speak to the model through the image gives a whole (2) more dimensions for expression.
+                    Thanks very much for taking the time to read this and I hope you found it interesting!
+                </p>
                 <p>
                     More in depth details at my <span className="terminal-highlight">github</span> under diffuser-painting!
                 </p>
