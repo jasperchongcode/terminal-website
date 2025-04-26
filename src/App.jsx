@@ -3,7 +3,7 @@ import { Spinner } from './components';
 import { eddy, labradoodle } from "./assets"
 
 //probably add 0.1.0 for a blog/page/big command, 0.0.1 for a noticeable chaneg, 1.0.0 for a major overhaul
-const version = "1.4.0"
+const version = "1.4.1"
 const asciiLine = <hr className='border-terminal-green my-2' />//"-".repeat(27) // to make reading files nicer 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
