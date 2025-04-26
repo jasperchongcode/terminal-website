@@ -278,6 +278,9 @@ v${version}`}</pre>
   // function to read the url and display a page if its in the url
   const handleParsePath = () => {
     const pathName = window.location.pathname.slice(1); // get the "filename"
+    if (!pathName) { // if its a url with nothing extra
+      return;
+    }
     const response = responses["read"]([pathName]) // Call read function
 
     // add calling the function to the command line
