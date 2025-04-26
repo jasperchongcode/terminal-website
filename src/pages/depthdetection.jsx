@@ -30,7 +30,7 @@ const DepthDetection = () => {
                 <p><span className="terminal-highlight">OpenCV</span> was used for general image processing, and <span className="terminal-highlight">MediaPipe</span> specifically for pose recognition.</p>
 
                 <h1>Features:</h1>
-                <ul>
+                <ul class="list-disc list-inside space-y-2">
                     <li>Relevant "joints" go green when the model is confident (configurable threshold).</li>
                     <li>Display of leg joint confidence.</li>
                     <li>Configurable threshold for required height difference to detect a rep.</li>
