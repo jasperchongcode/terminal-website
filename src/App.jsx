@@ -154,6 +154,8 @@ v${version}`}</pre>
   }, inputRef.selectionStart)
 
 
+  // get pathname for linking to "pages"
+  console.log(window.location.pathname)
 
 
   // State to hold the current user input value
@@ -273,6 +275,32 @@ v${version}`}</pre>
 
   const [recommendations, setRecommendations] = useState([])
 
+  // function to read the url and display a page if its in the url
+  const handleParsePath = () => {
+    const pathName = window.location.pathname.slice(1); // get the "filename"
+    const response = responses["read"]([pathName]) // Call read function
+
+    // add calling the function to the command line
+    setCommands(prevCommands => [
+      ...prevCommands,
+      [terminalText, `read ${pathName}`],
+    ]);
+
+    // If the response is an array, add each line separately
+    if (Array.isArray(response)) {
+      setCommands(prevCommands => [
+        ...prevCommands,
+        ...response.map(line => [line, ""]), // Wrap each line in an array
+      ]);
+    } else {
+      // For non-array responses, just add it directly
+      setCommands(prevCommands => [
+        ...prevCommands,
+        [response]
+      ]);
+    }
+  }
+
   // Auto scroll to bottom when commands updated
   useEffect(() => {
     outputRef.current.scrollTop = outputRef.current.scrollHeight
@@ -282,6 +310,11 @@ v${version}`}</pre>
   useEffect(() => {
     resizeInput(); // Resize the input initially
   }, []); // Re-run when currentInput changes
+
+  // code to parse the pathname for pages and display them if in the path
+  useEffect(() => {
+    handleParsePath()
+  }, [])
 
   const handleClick = (event) => {
 
