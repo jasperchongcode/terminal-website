@@ -3,10 +3,258 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+/* * {
   @apply bg-black text-terminal-green font-terminal text-sm md:text-base;
+} */
+
+/* Default theme, so can change colours */
+.default-theme {
+  @apply bg-black text-terminal-green font-terminal text-sm md:text-base;
+
+  img {
+    @apply border-terminal-green !important;
+  }
+
+  .cursor {
+    @apply bg-terminal-green;
+  }
+
+  .line {
+    @apply border-terminal-green my-2;
+  }
+
+  .typing-text,
+  .terminal-highlight {
+    @apply text-white;
+  }
+
+  /* .error {
+    @apply text-red-500;
+  } */
+
+
+  /* .link {
+    @apply text-blue-400 underline;
+  } */
+
 }
 
+.white-theme {
+  @apply bg-black text-white font-terminal text-sm md:text-base;
+
+  img {
+    @apply border-white !important;
+  }
+
+  .cursor {
+    @apply bg-white;
+  }
+
+  .line {
+    @apply border-white my-2;
+  }
+
+  .typing-text {
+    @apply text-white;
+  }
+
+  .terminal-highlight {
+    @apply text-white font-bold;
+  }
+
+  /* .error {
+    @apply text-red-500;
+  } */
+
+  /* .link {
+    @apply text-blue-400 underline;
+  } */
+}
+
+.black-theme {
+  @apply bg-white text-black font-terminal text-sm md:text-base;
+
+  img {
+    @apply border-black !important;
+  }
+  .cursor {
+    @apply bg-black;
+  }
+
+  .line {
+    @apply border-black my-2;
+  }
+
+  .typing-text {
+    @apply text-black;
+  }
+
+  .terminal-highlight {
+    @apply text-black font-bold;
+  }
+
+  /* .error {
+    @apply text-red-500;
+  } */
+
+  /* .link {
+    @apply text-blue-400 underline;
+  } */
+}
+
+.amber-theme {
+  @apply bg-black text-[#FFBF00] font-terminal text-sm md:text-base;
+
+  img {
+    @apply border-[#FFBF00] !important;
+  }
+
+  .cursor {
+    @apply bg-[#FFBF00];
+  }
+
+  .line {
+    @apply border-[#FFBF00] my-2;
+  }
+
+  .typing-text,
+  .terminal-highlight {
+    @apply text-white;
+  }
+
+  /* .error {
+    @apply text-red-500;
+  } */
+
+  /* .link {
+    @apply text-[#FFD580] underline;
+  } */
+}
+
+.dos-theme {
+  @apply bg-[#0000AA] text-[#FFFFFF] font-terminal text-sm md:text-base;
+
+  img {
+    @apply border-white !important;
+  }
+
+  .cursor {
+    @apply bg-white;
+  }
+
+  .line {
+    @apply border-white my-2;
+  }
+
+  .typing-text,
+  .terminal-highlight {
+    @apply text-white;
+  }
+
+  /* .error {
+    @apply text-red-500;
+  } */
+/* 
+  .link {
+    @apply text-[#FFFF00] underline;
+  } */
+}
+
+.red-theme {
+  @apply bg-black text-[#FF5555] font-terminal text-sm md:text-base;
+
+  img {
+    @apply border-[#FF5555] !important;
+  }
+
+  .cursor {
+    @apply bg-[#FF5555];
+  }
+
+  .line {
+    @apply border-[#FF5555] my-2;
+  }
+
+  .typing-text,
+  .terminal-highlight {
+    @apply text-white;
+  }
+
+  /* .error {
+    @apply text-red-500;
+  } */
+
+  /* .link {
+    @apply text-[#FF9999] underline;
+  } */
+}
+
+.solaris-theme {
+  @apply bg-[#1a1a1a] text-[#cccc99] font-terminal text-sm md:text-base;
+
+  img {
+    @apply border-[#cccc99] !important;
+  }
+
+  .cursor {
+    @apply bg-[#cccc99];
+  }
+
+  .line {
+    @apply border-[#999966] my-2;
+  }
+
+  .typing-text,
+  .terminal-highlight {
+    @apply text-white;
+  }
+}
+
+.purple-theme {
+  @apply bg-black text-[#BF00FF] font-terminal text-sm md:text-base;
+
+  img {
+    @apply border-[#BF00FF] !important;
+  }
+
+  .cursor {
+    @apply bg-[#BF00FF];
+  }
+
+  .line {
+    @apply border-[#BF00FF] my-2;
+  }
+
+  .typing-text,
+  .terminal-highlight {
+    @apply text-white;
+  }
+}
+
+.blue-theme {
+  @apply bg-black text-[#00BFFF] font-terminal text-sm md:text-base;
+
+  img {
+    @apply border-[#00BFFF] !important;
+  }
+
+  .cursor {
+    @apply bg-[#00BFFF];
+  }
+
+  .line {
+    @apply border-[#00BFFF] my-2;
+  }
+
+  .typing-text,
+  .terminal-highlight {
+    @apply text-white;
+  }
+
+}
+
+
+/* Fallback values */
 .typing-text {
   @apply text-white;
 }
@@ -23,13 +271,15 @@
   @apply text-white;
 }
 
+.line {
+  @apply border-terminal-green my-2;
+}
+
 
 .cursor {
   display: inline-block;
   width: 10px;
   height: 20px;
-  @apply bg-terminal-green;
-  
 }
 
 .cursor-animation {
@@ -43,7 +293,7 @@
 
 
 img {
-  @apply max-w-[1000px] border-4 border-terminal-green !important; /* Set your desired max width */
+  @apply max-w-[1000px] border-4; /* border-terminal-green !important; /* Set your desired max width */
   width: 100%; /* Ensure the image is responsive */
   height: auto; /* Maintain aspect ratio */
 }

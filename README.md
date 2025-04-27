@@ -1,5 +1,3 @@
 # Terminal themed Website
 
-This was my attempt at having a play with a terminal themed react site to act as my person website.
-In the past I've been more of a backend person than a front end person, and this is meant to embody that a little, 
-and also act as a challenge for me to improve my frontend.
+My personal website, designed around the theme of a computer terminal. When I first made it it was a great challenge to improve my javascript and frontend skills, and it has been great to have a platform to upload some writeups on my projects to. Feel free to use this as a base to make your own personal website (free hosting with vercel!). Would love to hear any feedback or ideas for the site.
