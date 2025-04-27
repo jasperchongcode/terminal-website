@@ -1,6 +1,6 @@
 // https://transform.tools/html-to-jsx
 const PairTrading = () => {
-    return (<>
+    return (<div className="bg-white m-4">
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>writeup</title>
@@ -3933,7 +3933,7 @@ const PairTrading = () => {
                 </div>
             </div>
         </div>
-    </>
+    </div>
     );
 }
 
