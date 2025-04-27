@@ -3,7 +3,7 @@ import { Spinner } from './components';
 import { labradoodle } from "./assets"
 
 //probably add 0.1.0 for a blog/page/big command, 0.0.1 for a noticeable chaneg, 1.0.0 for a major overhaul
-const version = "2.0.0"
+const version = "2.0.1"
 const asciiLine = <hr className='line' /> // to make reading files nicer 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
@@ -161,6 +161,9 @@ function App() {
     },
     "theme": (args) => {
       const newTheme = args[0]; // Get the new theme
+      if (!newTheme) {
+        return [<div className='error'>Invalid argument: null</div>]
+      }
       if (newTheme.toLowerCase() === "list") {
         return Object.keys(themes);
       }
