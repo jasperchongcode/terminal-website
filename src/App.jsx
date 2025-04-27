@@ -422,7 +422,7 @@ function App() {
           </p>
           {/* Display tab autofill recommendations if more than one*/}
           <p id="recommendations" className='grid grid-cols-1'>
-            {recommendations.map((recommendation, id) => <div id="id">{recommendation}</div>)}
+            {recommendations.map((recommendation, id) => <div id={id}>{recommendation}</div>)}
           </p>
           {/* This is so you can click in the empty space below the input and auto focus on the input */}
           <div id="empty-space" className="flex-grow pb-2" onClick={handleClick} />

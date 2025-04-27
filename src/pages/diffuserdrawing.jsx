@@ -25,9 +25,9 @@ const DiffuserDrawing = () => {
                 </div>
 
                 <p>The main features are:
-                    <ul class="list-disc list-inside space-y-2">
+                    <ul className="list-disc list-inside space-y-2">
                         <li>A basic Microsoft Paint style drawing tool:
-                            <ul class="list-disc list-inside ml-6 space-y-1">
+                            <ul className="list-disc list-inside ml-6 space-y-1">
                                 <li>Auto saves a mask with customizable padding</li>
                                 <li>Change brush colour</li>
                                 <li>Change brush size</li>
