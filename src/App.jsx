@@ -9,7 +9,7 @@ const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the 
 
 // lazy importing for speed
 const LazyPairTrading = () => lazy(() => import("./pages/pairtrading"));
-const LazyLorem = () => lazy(() => import("./pages/lorem"));
+// const LazyLorem = () => lazy(() => import("./pages/lorem"));
 const LazyLitClock = () => lazy(() => import("./pages/litclock"));
 const LazyAbout = () => lazy(() => import("./pages/about"));
 const LazySummerResearch = () => lazy(() => import("./pages/summerresearch"));
@@ -23,7 +23,7 @@ const LazyDiffuserDrawing = () => lazy(() => import("./pages/diffuserdrawing"));
 // may be worth adding folders and things eventually as i write more
 const files = {
   'about.txt': LazyAbout,
-  'lorem.txt': LazyLorem,
+  // 'lorem.txt': LazyLorem,
   'pairtrading.txt': LazyPairTrading,
   'litclock.txt': LazyLitClock,
   'summerresearch.txt': LazySummerResearch,
