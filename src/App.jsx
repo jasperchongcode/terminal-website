@@ -3,7 +3,7 @@ import { Spinner } from './components';
 import { labradoodle } from "./assets"
 
 //probably add 0.1.0 for a blog/page/big command, 0.0.1 for a noticeable chaneg, 1.0.0 for a major overhaul
-const version = "2.0.3"
+const version = "2.1.1"
 const asciiLine = <hr className='line' /> // to make reading files nicer 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
@@ -104,8 +104,10 @@ function App() {
 
   // Store the "recommendations" when using tab autofill
   const [recommendations, setRecommendations] = useState([])
-
+  // Current theme
   const [currentTheme, setCurrentTheme] = useState(themes['default'])
+  // Sets whether the crt filter effect is enabled
+  const [isCRTOn, setIsCRTOn] = useState(true);
 
   // The avaliable commands (must be defined in here as it changes state variables)
   const responses = {
@@ -122,6 +124,7 @@ function App() {
       "9. website - Get my website (you're already here though!).",
       "10. echo [text] - Echo the text you provide.",
       "11. theme [list/new-theme] - use 'theme list' to list avaliable themes, and 'theme [new-theme]' to switch.",
+      "12. crt - toggle the CRT effect (on by default).",
       asciiLine,
       <div>I recommend using the <span className='terminal-highlight'>"ls"</span> command to view the available files in the current directory.</div>,
       <div>You can then use the <span className='terminal-highlight'>"read [filename]"</span> command to read any of those files.</div>,
@@ -178,8 +181,14 @@ function App() {
       }
       else {
         return [<div className='error'>Theme not found: {newTheme}</div>]
+
       }
 
+    },
+    "crt": () => {
+      const previous = isCRTOn
+      setIsCRTOn((prev) => !prev)
+      return [`CRT mode set to: ${!isCRTOn}`]
     },
     "linkedin": [<a target="_blank" href="https://www.linkedin.com/in/jasper-chong-012345678910111213/" className="link">linkedin.com/jasperchong</a>],
     "github": [<a target="_blank" href="https://github.com/jasperchongcode" className="link">github.com/jasperchongcode</a>],
@@ -193,6 +202,12 @@ function App() {
   const changeTheme = (newTheme = "default-theme") => {
     const themer = document.getElementById('themer');
     themer.className = newTheme; // Sets the class to "new-class"
+  }
+
+  // Change crt effect
+  const setCRT = (on) => {
+    const crt = document.getElementById('crt');
+    crt.className = on ? "crt" : "";
   }
 
 
@@ -374,61 +389,73 @@ function App() {
     changeTheme(currentTheme)
   }, [currentTheme])
 
+  // Set CRT effect whenever the boolean changes
+  useEffect(() => {
+    console.log("SETTING CRT")
+    setCRT(isCRTOn)
+  }, [isCRTOn])
+
   return (
-    <div id="themer" className="default-theme">
-      {/* Full window (above is to set the colour theme) */}
-      <main className="px-6 pt-2 h-screen flex flex-col justify-start bg-inherit">
-        {/* Display terminal commands */}
-        <div
-          id="terminal-output"
-          ref={outputRef}
-          className="overflow-auto flex-grow mb-4 flex flex-col"
-        >
+    <div id="themer" className="efault-theme">
+      <div id="crt" className="crt">
+        {/* Full window (above is to set the colour theme) */}
+        <main className="px-6 pt-2 h-screen flex flex-col justify-start bg-inherit">
+          {/* Display terminal commands */}
+          <div
+            id="terminal-output"
+            ref={outputRef}
+            className="overflow-auto flex-grow mb-4 flex flex-col"
+          >
 
-          {commands.map((command, index) => (
-            <p key={index}>
-              {
-                (command.length == 2) ? (
-                  <span>{command[0]} <span className='typing-text'>{command[1]}</span></span>
-                ) : (
-                  <span>{command}</span>
-                )
-              }
+            {commands.map((command, index) => (
+              <p key={index}>
+                {
+                  (command.length == 2) ? (
+                    <span>{command[0]} <span className='typing-text'>{command[1]}</span></span>
+                  ) : (
+                    <span>{command}</span>
+                  )
+                }
+              </p>
+            ))}
+
+            {/* Input Field as part of the terminal */}
+            <p id="input-wrapper" className="flex items-center" onClick={handleClick}>
+              <span className="mr-2">{terminalText}</span>
+              <span className="relative">
+                {/* Fake input for CRT effects */}
+                <span className='typing-text pointer-events-none z-10'>
+                  {currentInput}
+                </span>
+                <input
+                  id="command-input"
+                  type="text"
+                  className="opacity-0 z-20 typing-input bg-transparent outline-none typing-text w-auto min-w-[1rem] flex-grow caret-transparent"
+                  value={currentInput}
+                  onChange={(e) => {
+                    console.log("setting current input to", e.target.value)
+                    setCurrentInput(prev => e.target.value);
+                    resizeInput(); // Resize input on change
+                  }}
+                  onKeyDown={handleKeyPress}
+                  onClick={resizeInput} // for handling moving cursor when clicking middle of string
+                  ref={inputRef}
+                  autoFocus
+                />
+                {/* Cursor */}
+                <span ref={cursorRef} className={`cursor absolute ${isBlinking ? "cursor-animation" : ""}`}></span>
+              </span>
             </p>
-          ))}
+            {/* Display tab autofill recommendations if more than one*/}
+            <p id="recommendations" className='grid grid-cols-1'>
+              {recommendations.map((recommendation, id) => <div id={id}>{recommendation}</div>)}
+            </p>
+            {/* This is so you can click in the empty space below the input and auto focus on the input */}
+            <div id="empty-space" className="flex-grow pb-2" onClick={handleClick} />
 
-          {/* Input Field as part of the terminal */}
-          <p id="input-wrapper" className="flex items-center" onClick={handleClick}>
-            <span className="mr-2">{terminalText}</span>
-            <span className="relative">
-              <input
-                id="command-input"
-                type="text"
-                className="typing-input bg-transparent outline-none typing-text w-auto min-w-[1rem] flex-grow caret-transparent"
-                value={currentInput}
-                onChange={(e) => {
-                  console.log("setting current input to", e.target.value)
-                  setCurrentInput(prev => e.target.value);
-                  resizeInput(); // Resize input on change
-                }}
-                onKeyDown={handleKeyPress}
-                onClick={resizeInput} // for handling moving cursor when clicking middle of string
-                ref={inputRef}
-                autoFocus
-              />
-              {/* Cursor */}
-              <span ref={cursorRef} className={`cursor absolute ${isBlinking ? "cursor-animation" : ""}`}></span>
-            </span>
-          </p>
-          {/* Display tab autofill recommendations if more than one*/}
-          <p id="recommendations" className='grid grid-cols-1'>
-            {recommendations.map((recommendation, id) => <div id={id}>{recommendation}</div>)}
-          </p>
-          {/* This is so you can click in the empty space below the input and auto focus on the input */}
-          <div id="empty-space" className="flex-grow pb-2" onClick={handleClick} />
-
-        </div>
-      </main>
+          </div>
+        </main>
+      </div>
     </div>
   );
 }

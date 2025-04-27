@@ -3,6 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* * {
   @apply bg-black text-terminal-green font-terminal text-sm md:text-base;
 } */
@@ -10,6 +11,7 @@
 /* Default theme, so can change colours */
 .default-theme {
   @apply bg-black text-terminal-green font-terminal text-sm md:text-base;
+  /* font-family: "Glass_TTY_VT220" !important; */
 
   img {
     @apply border-terminal-green !important;
@@ -87,6 +89,7 @@
 
   .typing-text {
     @apply text-black;
+
   }
 
   .terminal-highlight {
@@ -297,3 +300,134 @@ img {
   width: 100%; /* Ensure the image is responsive */
   height: auto; /* Maintain aspect ratio */
 }
+
+/* crt code adjusted from here (made a little less aggressive) https://aleclownes.com/2017/02/01/crt-display.html*/
+
+@keyframes flicker {
+  0% {
+    opacity: 0.2;
+  }
+  5% {
+    opacity: 0.3;
+  }
+  10% {
+    opacity: 0.18;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  20% {
+    opacity: 0.15;
+  }
+  25% {
+    opacity: 0.55;
+  }
+  30% {
+    opacity: 0.45;
+  }
+  35% {
+    opacity: 0.5;
+  }
+  40% {
+    opacity: 0.25;
+  }
+  45% {
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 0.75;
+  }
+  55% {
+    opacity: 0.1;
+  }
+  60% {
+    opacity: 0.2;
+  }
+  65% {
+    opacity: 0.5;
+  }
+  70% {
+    opacity: 0.4;
+  }
+  75% {
+    opacity: 0.3;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  85% {
+    opacity: 0.48;
+  }
+  90% {
+    opacity: 0.45;
+  }
+  95% {
+    opacity: 0.28;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+
+@keyframes textShadow {
+  0% {
+    text-shadow: 0.2px 0 1px rgba(0, 30, 255, 0.5),
+      -0.2px 0 1px rgba(255, 0, 80, 0.3), 0 0 1px;
+  }
+  25% {
+    text-shadow: 0.5px 0 1px rgba(0, 30, 255, 0.5),
+      -0.5px 0 1px rgba(255, 0, 80, 0.3), 0 0 1px;
+  }
+  50% {
+    text-shadow: 0.1px 0 1px rgba(0, 30, 255, 0.5),
+      -0.1px 0 1px rgba(255, 0, 80, 0.3), 0 0 1px;
+  }
+  75% {
+    text-shadow: 0.4px 0 1px rgba(0, 30, 255, 0.5),
+      -0.4px 0 1px rgba(255, 0, 80, 0.3), 0 0 1px;
+  }
+  100% {
+    text-shadow: 0.2px 0 1px rgba(0, 30, 255, 0.5),
+      -0.2px 0 1px rgba(255, 0, 80, 0.3), 0 0 1px;
+  }
+}
+
+.crt::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+.crt::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+.crt {
+  animation: textShadow 1.6s infinite;
+}
+
+
