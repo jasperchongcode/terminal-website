@@ -3,7 +3,7 @@ import { Spinner } from './components';
 import { labradoodle } from "./assets"
 
 //probably add 0.1.0 for a blog/page/big command, 0.0.1 for a noticeable chaneg, 1.0.0 for a major overhaul
-const version = "2.0.1"
+const version = "2.0.2"
 const asciiLine = <hr className='line' /> // to make reading files nicer 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
@@ -135,6 +135,11 @@ function App() {
     "ls": () => Object.keys(files), // List files in the home directory
     "read": (args) => {
       const filename = args[0]; // Get the filename from arguments
+
+      if (!filename) { // if its null return
+        return [<div className='error'>Invalid argument: null</div>]
+      }
+
       if (files[filename.toLowerCase()]) {
         const LazyComponent = files[filename.toLowerCase()]()
         return [<>
@@ -281,6 +286,7 @@ function App() {
       event.preventDefault(); // Prevent default tab behavior (moving focus)
 
       const inputParts = currentInput.trim().split(" ");
+      // if its only "one command"
       if (inputParts.length === 1 && currentInput.trim()) {
         // Autocomplete commands
         const matches = Object.keys(responses).filter(cmd => cmd.startsWith(inputParts[0].toLowerCase()));
@@ -292,8 +298,18 @@ function App() {
         }
       }
       else if (inputParts.length === 2 && currentInput.trim()) {
-        // Autocomplete filenames
-        const matches = Object.keys(files).filter(file => file.startsWith(inputParts[1].toLowerCase()));
+
+        var optionList = [] // set to nothing by default
+
+        // Check what the first command is to determine the valid options
+        if (inputParts[0].toLowerCase() === "read") {
+          optionList = Object.keys(files)
+        } else if (inputParts[0].toLowerCase() === "theme") {
+          optionList = [...Object.keys(themes), "list"];
+        }
+        // Fine the matches 
+        const matches = optionList.filter(option => option.startsWith(inputParts[1].toLowerCase()));
+
         if (matches.length === 1) {
           setCurrentInput(`${inputParts[0]} ${matches[0]}`);
         } else if (matches.length > 1) {
