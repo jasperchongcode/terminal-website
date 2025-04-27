@@ -5,7 +5,7 @@ const DepthDetection = () => {
     return (
         <>
             <div className="py-2  gap-8 flex flex-col">
-                <h1 className="font-bold text-base md:text-lg">Using computer vision for detecting squat depth</h1>
+                <h1 className="font-bold text-base md:text-lg">Using computer vision for detecting squat depth (2025)</h1>
 
 
                 <p>

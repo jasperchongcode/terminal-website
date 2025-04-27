@@ -52,7 +52,7 @@ const PairTrading = () => {
                         data-mime-type="text/markdown"
                     >
                         <p>
-                            This notebook aims to implement the two copula based strategies from
+                            This notebook (created by me in 2023) aims to implement the two copula based strategies from
                             research papers (seen later). The heavy lifting calculations are
                             conducted using the <code>pyvinecopulib</code> library. If you have{" "}
                             <em>any</em> feedback, or have any experience with this type of

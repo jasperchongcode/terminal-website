@@ -52,7 +52,7 @@ const LitClock = () => {
                             data-mime-type="text/markdown"
                         >
                             <h1 id="Literature-clock-project">
-                                Literature clock project
+                                Literature clock project (2024)
                                 <a className="anchor-link" href="#Literature-clock-project">
                                     ¶
                                 </a>

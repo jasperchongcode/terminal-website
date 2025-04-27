@@ -5,7 +5,7 @@ const DiffuserDrawing = () => {
     return (
         <>
             <div className="py-2 gap-8 flex flex-col">
-                <h1 className="font-bold text-base md:text-lg">Using Diffusers to Improve Basic Art</h1>
+                <h1 className="font-bold text-base md:text-lg">Using Diffusers to Improve Basic Art (2025)</h1>
 
                 <p>
                     Quite a few years ago now I saw a demo of Nvidida's Canvas tool and that totally blew my mind at the time. When I started working through huggingface's free diffuser course I realised it would be possible for me to create a project loosely inspired by this idea.
