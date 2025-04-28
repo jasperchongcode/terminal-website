@@ -149,10 +149,15 @@
     @apply border-white my-2;
   }
 
-  .typing-text,
-  .terminal-highlight {
+
+  .typing-text {
     @apply text-white;
   }
+
+  .terminal-highlight {
+    @apply text-white font-bold;
+  }
+
 
   /* .error {
     @apply text-red-500;
