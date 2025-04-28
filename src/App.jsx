@@ -25,19 +25,30 @@ const files = {
   'aidepthdetection.txt': LazyDepthDetection,
   'diffuserdrawing.txt': LazyDiffuserDrawing,
 }
-
 // Used to toggle between colour themes
 const themes = {
-  "default": "default-theme",
-  "white": "white-theme",
-  "black": "black-theme",
-  "amber": "amber-theme",
-  "dos": "dos-theme",
-  "red": "red-theme",
-  "solaris": "solaris-theme",
-  "purple": "purple-theme",
-  "blue": "blue-theme"
+  default: "default-theme",
+
+  amber: "amber-theme",
+  black: "black-theme",
+  blue: "blue-theme",
+  commodore: "commodore-theme",
+  cyberpunk: "cyberpunk-theme",
+  dracula: "dracula-theme",
+  dos: "dos-theme",
+  gruvbox: "gruvbox-theme",
+  monokai: "monokai-theme",
+  nord: "nord-theme",
+  "one-dark": "one-dark-theme",
+  palenight: "palenight-theme",
+  purple: "purple-theme",
+  red: "red-theme",
+  "solarized-dark": "solarized-dark-theme",
+  "solarized-light": "solarized-light-theme",
+  solaris: "solaris-theme",
+  white: "white-theme",
 };
+
 
 
 // to display welcome message 

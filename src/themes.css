@@ -1,0 +1,339 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.white-theme {
+    @apply bg-black text-white font-terminal text-sm md:text-base;
+  
+    img {
+      @apply border-white !important;
+    }
+  
+    .cursor {
+      @apply bg-white;
+    }
+  
+    .line {
+      @apply border-white my-2;
+    }
+  
+    .typing-text {
+      @apply text-white;
+    }
+  
+    .terminal-highlight {
+      @apply text-white font-bold;
+    }
+  
+    /* .error {
+      @apply text-red-500;
+    } */
+  
+    /* .link {
+      @apply text-blue-400 underline;
+    } */
+  }
+  
+  .black-theme {
+    @apply bg-white text-black font-terminal text-sm md:text-base;
+  
+    img {
+      @apply border-black !important;
+    }
+    .cursor {
+      @apply bg-black;
+    }
+  
+    .line {
+      @apply border-black my-2;
+    }
+  
+    .typing-text {
+      @apply text-black;
+  
+    }
+  
+    .terminal-highlight {
+      @apply text-black font-bold;
+    }
+  
+    /* .error {
+      @apply text-red-500;
+    } */
+  
+    /* .link {
+      @apply text-blue-400 underline;
+    } */
+  }
+  
+  .amber-theme {
+    @apply bg-black text-[#FFBF00] font-terminal text-sm md:text-base;
+  
+    img {
+      @apply border-[#FFBF00] !important;
+    }
+  
+    .cursor {
+      @apply bg-[#FFBF00];
+    }
+  
+    .line {
+      @apply border-[#FFBF00] my-2;
+    }
+  
+    .typing-text,
+    .terminal-highlight {
+      @apply text-white;
+    }
+  
+    /* .error {
+      @apply text-red-500;
+    } */
+  
+    /* .link {
+      @apply text-[#FFD580] underline;
+    } */
+  }
+  
+  .dos-theme {
+    @apply bg-[#0000AA] text-[#FFFFFF] font-terminal text-sm md:text-base;
+  
+    img {
+      @apply border-white !important;
+    }
+  
+    .cursor {
+      @apply bg-white;
+    }
+  
+    .line {
+      @apply border-white my-2;
+    }
+  
+  
+    .typing-text {
+      @apply text-white;
+    }
+  
+    .terminal-highlight {
+      @apply text-white font-bold;
+    }
+  
+  
+    /* .error {
+      @apply text-red-500;
+    } */
+  /* 
+    .link {
+      @apply text-[#FFFF00] underline;
+    } */
+  }
+  
+  
+  
+  .solaris-theme {
+    @apply bg-[#1a1a1a] text-[#cccc99] font-terminal text-sm md:text-base;
+  
+    img {
+      @apply border-[#cccc99] !important;
+    }
+  
+    .cursor {
+      @apply bg-[#cccc99];
+    }
+  
+    .line {
+      @apply border-[#999966] my-2;
+    }
+  
+    .typing-text,
+    .terminal-highlight {
+      @apply text-white;
+    }
+  }
+  /* Red Theme */
+.red-theme {
+    @apply bg-black text-[#E06C75] font-terminal text-sm md:text-base;
+    img                 { @apply border-[#E06C75] !important; }
+    .cursor             { @apply bg-[#E06C75]; }
+    .line               { @apply border-[#E06C75] my-2; }
+  
+    /* typing-text in bright coral, highlight bold white */
+    .typing-text        { @apply text-[#FF6E6E]; }        /* coral */
+    .terminal-highlight { @apply text-white font-bold; }  /* pure white */
+  }
+  
+  /* Purple Theme */
+  .purple-theme {
+    @apply bg-black text-[#9D7CD8] font-terminal text-sm md:text-base;
+    img                 { @apply border-[#9D7CD8] !important; }
+    .cursor             { @apply bg-[#9D7CD8]; }
+    .line               { @apply border-[#9D7CD8] my-2; }
+  
+    /* typing-text in pastel lavender, highlight bold mint */
+    .typing-text        { @apply text-[#C39EEB]; }        /* lavender */
+    .terminal-highlight { @apply text-[#A6FFCB] font-bold; } /* mint */
+  }
+  
+  /* Blue Theme */
+  .blue-theme {
+    @apply bg-black text-[#4DA6FF] font-terminal text-sm md:text-base;
+    img                 { @apply border-[#4DA6FF] !important; }
+    .cursor             { @apply bg-[#4DA6FF]; }
+    .line               { @apply border-[#4DA6FF] my-2; }
+  
+    /* typing-text in electric sky, highlight bold magenta */
+    .typing-text        { @apply text-[#80CFFF]; }        /* sky blue */
+    .terminal-highlight { @apply text-[#FF66CC] font-bold; } /* magenta */
+  }
+  
+  /* Dracula Theme */
+  .dracula-theme {
+    @apply bg-[#282A36] text-[#F8F8F2] font-terminal text-sm md:text-base;
+    img    { @apply border-[#BD93F9] !important; }
+    .cursor{ @apply bg-[#50FA7B]; }
+    .line  { @apply border-[#BD93F9] my-2; }
+  
+    .typing-text {
+      @apply text-[#6272A4];       /* soft purple */
+    }
+    .terminal-highlight {
+      @apply text-[#FF79C6] font-bold;  /* bold pink */
+    }
+  }
+  
+  /* Solarized Dark Theme */
+  .solarized-dark-theme {
+    @apply bg-[#002B36] text-[#839496] font-terminal text-sm md:text-base;
+    img    { @apply border-[#586E75] !important; }
+    .cursor{ @apply bg-[#268BD2]; }
+    .line  { @apply border-[#586E75] my-2; }
+  
+    .typing-text {
+      @apply text-[#2AA198];       /* cyan */
+    }
+    .terminal-highlight {
+      @apply text-[#B58900] font-bold;  /* bold yellow */
+    }
+  }
+  
+  /* Solarized Light Theme */
+  .solarized-light-theme {
+    @apply bg-[#FDF6E3] text-[#657B83] font-terminal text-sm md:text-base;
+    img    { @apply border-[#93A1A1] !important; }
+    .cursor{ @apply bg-[#268BD2]; }
+    .line  { @apply border-[#93A1A1] my-2; }
+  
+    .typing-text {
+      @apply text-[#268BD2];       /* blue */
+    }
+    .terminal-highlight {
+      @apply text-[#DC322F] font-bold;  /* bold red */
+    }
+  }
+  
+  /* Nord Theme */
+  .nord-theme {
+    @apply bg-[#2E3440] text-[#D8DEE9] font-terminal text-sm md:text-base;
+    img    { @apply border-[#81A1C1] !important; }
+    .cursor{ @apply bg-[#88C0D0]; }
+    .line  { @apply border-[#81A1C1] my-2; }
+  
+    .typing-text {
+      @apply text-[#8FBCBB];       /* muted cyan */
+    }
+    .terminal-highlight {
+      @apply text-[#81A1C1] font-bold;  /* bold steel blue */
+    }
+  }
+  
+  /* Gruvbox Dark Theme */
+  .gruvbox-theme {
+    @apply bg-[#282828] text-[#EBDBB2] font-terminal text-sm md:text-base;
+    img    { @apply border-[#458588] !important; }
+    .cursor{ @apply bg-[#B8BB26]; }
+    .line  { @apply border-[#458588] my-2; }
+  
+    .typing-text {
+      @apply text-[#FABD2F];       /* yellow */
+    }
+    .terminal-highlight {
+      @apply text-[#FB4934] font-bold;  /* bold red */
+    }
+  }
+  
+  /* Cyberpunk / Neon Theme */
+  .cyberpunk-theme {
+    @apply bg-[#0F0F0F] text-[#FF4268] font-terminal text-sm md:text-base;
+    img    { @apply border-[#08F7FE] !important; }
+    .cursor{ @apply bg-[#08F7FE]; }
+    .line  { @apply border-[#FE53BB] my-2; }
+  
+    .typing-text {
+      @apply text-[#39FF14];       /* electric green */
+    }
+    .terminal-highlight {
+      @apply text-[#08F7FE] font-bold;  /* bold cyan */
+    }
+  }
+  
+  /* Retro Commodore 64 Theme */
+  .commodore-theme {
+    @apply bg-[#000080] text-[#FFFFFF] font-terminal text-sm md:text-base;
+    img    { @apply border-[#00FFFF] !important; }
+    .cursor{ @apply bg-[#FF00FF]; }
+    .line  { @apply border-[#00FFFF] my-2; }
+  
+    .typing-text {
+      @apply text-[#FF00FF];       /* magenta */
+    }
+    .terminal-highlight {
+      @apply text-[#00FFFF] font-bold;  /* bold cyan */
+    }
+  }
+  
+  /* Monokai Theme */
+  .monokai-theme {
+    @apply bg-[#272822] text-[#F8F8F2] font-terminal text-sm md:text-base;
+    img    { @apply border-[#A6E22E] !important; }
+    .cursor{ @apply bg-[#F92672]; }
+    .line  { @apply border-[#A6E22E] my-2; }
+  
+    .typing-text {
+      @apply text-[#A6E22E];       /* green */
+    }
+    .terminal-highlight {
+      @apply text-[#FD971F] font-bold;  /* bold orange */
+    }
+  }
+  
+  /* One Dark (new) */
+  .one-dark-theme {
+    @apply bg-[#282C34] text-[#ABB2BF] font-terminal text-sm md:text-base;
+    img    { @apply border-[#61AFEF] !important; }
+    .cursor{ @apply bg-[#E06C75]; }
+    .line  { @apply border-[#61AFEF] my-2; }
+  
+    .typing-text {
+      @apply text-[#98C379];       /* green */
+    }
+    .terminal-highlight {
+      @apply text-[#C678DD] font-bold;  /* bold purple */
+    }
+  }
+  
+  /* Palenight (new) */
+  .palenight-theme {
+    @apply bg-[#292D3E] text-[#A6ACCD] font-terminal text-sm md:text-base;
+    img    { @apply border-[#565A97] !important; }
+    .cursor{ @apply bg-[#C792EA]; }
+    .line  { @apply border-[#565A97] my-2; }
+  
+    .typing-text {
+      @apply text-[#82AAFF];       /* blue */
+    }
+    .terminal-highlight {
+      @apply text-[#FFCB6B] font-bold;  /* bold yellow */
+    }
+  }
+  
