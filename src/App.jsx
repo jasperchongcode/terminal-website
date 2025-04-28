@@ -52,10 +52,10 @@ const currentDateTime = new Date().toLocaleString([], {
 });
 
 
-// Default starting display when opening the site
+// Default starting display when opening the site (use custom size so it fits on mobile screens well)
 const defaultCommands = [
   [<span className='flex flex-col md:flex-row pt-3'>
-    <pre className='text-sm md:text-base'>
+    <pre className='text-[0.625rem]/[0.75rem] md:text-base'>
       {`     ██╗ █████╗ ███████╗██████╗ ███████╗██████╗     
      ██║██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗    
      ██║███████║███████╗██████╔╝█████╗  ██████╔╝    
@@ -65,7 +65,7 @@ const defaultCommands = [
                                                     `}
     </pre>
     <span className='flex flex-row'>
-      <pre className='text-sm md:text-base'>
+      <pre className='text-[0.625rem]/[0.75rem] md:text-base'>
         {` ██████╗██╗  ██╗ ██████╗ ███╗   ██╗ ██████╗ 
 ██╔════╝██║  ██║██╔═══██╗████╗  ██║██╔════╝ 
 ██║     ███████║██║   ██║██╔██╗ ██║██║  ███╗
@@ -74,7 +74,7 @@ const defaultCommands = [
  ╚═════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ 
                                             `}
       </pre>
-      <pre className='text-sm md:text-base typing-text font-bold'>{`
+      <pre className='text-[0.625rem]/[0.75rem] md:text-base typing-text font-bold'>{`
       
       
       
