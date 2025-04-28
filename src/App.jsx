@@ -1,9 +1,9 @@
-import React, { useRef, useState, useEffect, lazy, Suspense } from 'react';
+import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import { Spinner } from './components';
 import { labradoodle } from "./assets"
 
 //probably add 0.1.0 for a blog/page/big command, 0.0.1 for a noticeable chaneg, 1.0.0 for a major overhaul
-const version = "2.1.1"
+const version = "2.1.2"
 const asciiLine = <hr className='line' /> // to make reading files nicer 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
@@ -54,7 +54,7 @@ const currentDateTime = new Date().toLocaleString([], {
 
 // Default starting display when opening the site (use custom size so it fits on mobile screens well)
 const defaultCommands = [
-  [<span className='flex flex-col md:flex-row pt-3'>
+  [<span key="name" className='flex flex-col md:flex-row pt-3'>
     <pre className='text-[0.625rem]/[0.75rem] md:text-base'>
       {`     ██╗ █████╗ ███████╗██████╗ ███████╗██████╗     
      ██║██╔══██╗██╔════╝██╔══██╗██╔════╝██╔══██╗    
@@ -83,9 +83,9 @@ v${version}`}</pre>
     </span>
   </span>],
   [`${terminalText}Welcome to the JC terminal`, ""],
-  [<p>{`Session start time: ${currentDateTime}`}</p>],
+  [<p key="start-time">{`Session start time: ${currentDateTime}`}</p>],
   ['Type a command and press Enter.', ""],
-  [<div className="font-bold">Type <span className='terminal-highlight'>"help"</span> to see the available commands.</div>, ""],
+  [<div key="help-message" className="font-bold">Type <span className='terminal-highlight'>&quot;help&quot;</span> to see the available commands.</div>, ""],
 ];
 
 function App() {
@@ -126,8 +126,8 @@ function App() {
       "11. theme [list/new-theme] - use 'theme list' to list avaliable themes, and 'theme [new-theme]' to switch.",
       "12. crt - toggle the CRT effect (on by default).",
       asciiLine,
-      <div>I recommend using the <span className='terminal-highlight'>"ls"</span> command to view the available files in the current directory.</div>,
-      <div>You can then use the <span className='terminal-highlight'>"read [filename]"</span> command to read any of those files.</div>,
+      <div key="recommend">I recommend using the <span className='terminal-highlight'>&quot;ls&quot;</span> command to view the available files in the current directory.</div>,
+      <div key="read">You can then use the <span className='terminal-highlight'>&quot;read [filename]&quot;</span> command to read any of those files.</div>,
       "Commands are not case-sensitive, and you don't need to type the file extensions (tab autofill is avaliable also!).",
       "I hope you enjoy the site :)",
       asciiLine
@@ -140,7 +140,7 @@ function App() {
       const filename = args[0]; // Get the filename from arguments
 
       if (!filename) { // if its null return
-        return [<div className='error'>Invalid argument: null</div>]
+        return [<div key="error" className='error'>Invalid argument: null</div>]
       }
 
       if (files[filename.toLowerCase()]) {
@@ -164,13 +164,13 @@ function App() {
         </>]; // Return the contents if file exists
       }
       else {
-        return [<div className='error'>File not found: {filename}</div>]; // Handle file not found
+        return [<div key="error" className='error'>File not found: {filename}</div>]; // Handle file not found
       }
     },
     "theme": (args) => {
       const newTheme = args[0]; // Get the new theme
       if (!newTheme) {
-        return [<div className='error'>Invalid argument: null</div>]
+        return [<div key="error" className='error'>Invalid argument: null</div>]
       }
       if (newTheme.toLowerCase() === "list") {
         return Object.keys(themes);
@@ -180,22 +180,22 @@ function App() {
         return [`Theme set to: ${newTheme}`]
       }
       else {
-        return [<div className='error'>Theme not found: {newTheme}</div>]
+        return [<div key="error" className='error'>Theme not found: {newTheme}</div>]
 
       }
 
     },
     "crt": () => {
-      const previous = isCRTOn
+      const previous = isCRTOn;
       setIsCRTOn((prev) => !prev)
-      return [`CRT mode set to: ${!isCRTOn}`]
+      return [`CRT mode set to: ${!previous}`]
     },
-    "linkedin": [<a target="_blank" href="https://www.linkedin.com/in/jasper-chong-012345678910111213/" className="link">linkedin.com/jasperchong</a>],
-    "github": [<a target="_blank" href="https://github.com/jasperchongcode" className="link">github.com/jasperchongcode</a>],
-    "email": [<a href="mailto: contact@jasperchong.com" className="link">contact@jasperchong.com</a>],
-    "website": [<a href="https://jasperchong.com" className="link">jasperchong.com</a>],
-    "spotify": [<a target="_blank" href="https://open.spotify.com/user/7mqmetexug75muj9bosr7cd40?si=0f1f1ecfd5e84b4f&nd=1&dlsi=c73852fab98749db" className="link">spotify.com/jasperchong</a>],
-    "labradoodle": [<img className="image" src={labradoodle} alt="Two labradoodles on a car" border="0" />],
+    "linkedin": [<a key="linkedin" target="_blank" href="https://www.linkedin.com/in/jasper-chong-012345678910111213/" className="link">linkedin.com/jasperchong</a>],
+    "github": [<a key="github" target="_blank" href="https://github.com/jasperchongcode" className="link">github.com/jasperchongcode</a>],
+    "email": [<a key="email" href="mailto: contact@jasperchong.com" className="link">contact@jasperchong.com</a>],
+    "website": [<a key="website" href="https://jasperchong.com" className="link">jasperchong.com</a>],
+    "spotify": [<a key="spotify" target="_blank" href="https://open.spotify.com/user/7mqmetexug75muj9bosr7cd40?si=0f1f1ecfd5e84b4f&nd=1&dlsi=c73852fab98749db" className="link">spotify.com/jasperchong</a>],
+    "labradoodle": [<img key="labradoodle" className="image" src={labradoodle} alt="Two labradoodles on a car" border="0" />],
   };
 
   // Update the colour theme
@@ -242,7 +242,7 @@ function App() {
     setTimeout(() => resizeInput(), 0); // small timeout is used for making sure selection location is updated
 
     if (event.key === 'Enter') {
-      setRecommendations(prev => [])
+      setRecommendations([])
 
       const userCommand = currentInput.trim(); // Get the input text
 
@@ -288,7 +288,7 @@ function App() {
           // Handle unknown command
           setCommands(prevCommands => [
             ...prevCommands,
-            [<span className="error">Command not found: </span>, userCommand]
+            [<span key="error" className="error">Command not found: </span>, userCommand]
           ]);
         }
 
@@ -308,7 +308,7 @@ function App() {
         if (matches.length === 1) {
           setCurrentInput(matches[0]); // Autofill if only one match
         } else if (matches.length > 1) {
-          setRecommendations(prev => matches)
+          setRecommendations(matches)
 
         }
       }
@@ -328,14 +328,14 @@ function App() {
         if (matches.length === 1) {
           setCurrentInput(`${inputParts[0]} ${matches[0]}`);
         } else if (matches.length > 1) {
-          setRecommendations(prev => matches)
+          setRecommendations(matches)
         }
       }
     }
   };
 
   // Function to focus on the input field on click
-  const handleClick = (event) => {
+  const handleClick = () => {
     inputRef.current.focus(); // Focus the input field when the document is clicked
   };
 
@@ -382,7 +382,7 @@ function App() {
   // Parse the url and display file (if url not null) at mount
   useEffect(() => {
     handleParsePath()
-  }, [])
+  })
 
   // Set the theme whenever current theme changes
   useEffect(() => {
@@ -408,7 +408,7 @@ function App() {
           >
 
             {commands.map((command, index) => (
-              <p key={index}>
+              <div key={index}>
                 {
                   (command.length == 2) ? (
                     <span>{command[0]} <span className='typing-text'>{command[1]}</span></span>
@@ -416,7 +416,7 @@ function App() {
                     <span>{command}</span>
                   )
                 }
-              </p>
+              </div>
             ))}
 
             {/* Input Field as part of the terminal */}
@@ -434,7 +434,7 @@ function App() {
                   value={currentInput}
                   onChange={(e) => {
                     console.log("setting current input to", e.target.value)
-                    setCurrentInput(prev => e.target.value);
+                    setCurrentInput(e.target.value);
                     resizeInput(); // Resize input on change
                   }}
                   onKeyDown={handleKeyPress}
@@ -447,9 +447,9 @@ function App() {
               </span>
             </p>
             {/* Display tab autofill recommendations if more than one*/}
-            <p id="recommendations" className='grid grid-cols-1'>
-              {recommendations.map((recommendation, id) => <div id={id}>{recommendation}</div>)}
-            </p>
+            <div id="recommendations" className='grid grid-cols-1'>
+              {recommendations.map((recommendation, id) => <div key={id}>{recommendation}</div>)}
+            </div>
             {/* This is so you can click in the empty space below the input and auto focus on the input */}
             <div id="empty-space" className="flex-grow pb-2" onClick={handleClick} />
 

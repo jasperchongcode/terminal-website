@@ -295,11 +295,12 @@
 }
 
 
+/* Tailwind utility styles for images */
 img {
-  @apply max-w-[1000px] border-4; /* border-terminal-green !important; /* Set your desired max width */
-  width: 100%; /* Ensure the image is responsive */
-  height: auto; /* Maintain aspect ratio */
+  @apply max-w-[1000px] w-full h-auto ; 
+  border: 4px solid; 
 }
+
 
 /* crt code adjusted from here (made a little less aggressive) https://aleclownes.com/2017/02/01/crt-display.html*/
 

@@ -1,0 +1,11 @@
+// {
+//     "plugins": [
+//         "react"
+//     ],
+//     "extends": [
+//         "plugin:react/recommended"
+//     ],
+//     "rules": {
+//         // "react/no-invalid-html": "warn"
+//     }
+// }
