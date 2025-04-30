@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import { Spinner } from './components';
-import { labradoodle } from "./assets"
+import { labradoodle, devan_eleven } from "./assets"
 
 //probably add 0.1.0 for a blog/page/big command, 0.0.1 for a noticeable chaneg, 1.0.0 for a major overhaul
 const version = "2.1.3"
@@ -98,6 +98,10 @@ v${version}`}</pre>
   ['Type a command and press Enter.', ""],
   [<div key="help-message" className="font-bold">Type <span className='terminal-highlight'>&quot;help&quot;</span> to see the available commands.</div>, ""],
 ];
+
+const hiddenResponses = {
+  "1️⃣1️⃣": [<img key="eleven" className="image" src={devan_eleven} alt="Very attractive man" border="0" />]
+}
 
 function App() {
 
@@ -295,6 +299,25 @@ function App() {
               [response]
             ]);
           }
+        } else if (hiddenResponses[command.toLowerCase()]) { // handle easter egg responses
+          const response = typeof hiddenResponses[command.toLowerCase()] === 'function'
+            ? hiddenResponses[command.toLowerCase()](args) // Call function if it's a dynamic response
+            : hiddenResponses[command.toLowerCase()]; // Get static response
+
+          // If the response is an array, add each line separately
+          if (Array.isArray(response)) {
+            setCommands(prevCommands => [
+              ...prevCommands,
+              ...response.map(line => [line, ""]), // Wrap each line in an array
+            ]);
+          } else {
+            // For non-array responses, just add it directly
+            setCommands(prevCommands => [
+              ...prevCommands,
+              [response]
+            ]);
+          }
+
         } else {
           // Handle unknown command
           setCommands(prevCommands => [
