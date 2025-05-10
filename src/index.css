@@ -355,4 +355,13 @@ img {
   animation: textShadow 1.6s infinite;
 }
 
+/* this container will escape the CRT overlay */
+.no-crt {
+  position: relative;
+  z-index: 3;         /* higher than 2 */
+  /* also kill any text-shadow flicker inside it */
+  animation: none !important;
+  text-shadow: none  !important;
+}
+
 
