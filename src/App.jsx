@@ -416,7 +416,8 @@ function App() {
   // Parse the url and display file (if url not null) at mount
   useEffect(() => {
     handleParsePath()
-  })
+    console.log("IM PARSING IT")
+  }, [])
 
   // Set the theme whenever current theme changes
   useEffect(() => {
