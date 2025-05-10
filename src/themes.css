@@ -36,6 +36,9 @@
   
   .black-theme {
     @apply bg-white text-black font-terminal text-sm md:text-base;
+
+    --crt-primary:   rgba(120, 120, 120, 0.20);  /* mid-gray @ 30% */
+    --crt-secondary: rgba(120, 120, 120, 0.10);  /* same hue, @ 15% */
   
     img {
       @apply border-black !important;
