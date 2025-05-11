@@ -233,7 +233,7 @@ function App() {
 
 
     if (input && cursor) {
-      console.log("CALLED with", input.selectionStart, input.value.length + 1)
+      // console.log("CALLED with", input.selectionStart, input.value.length + 1)
       input.style.width = `${input.value.length + 1}ch`; // Add 1 for padding
 
       // cursor.style.left = `${input.value.length}ch`; // Cursor to the right of the text
@@ -425,7 +425,7 @@ function App() {
 
   // Set CRT effect whenever the boolean changes
   useEffect(() => {
-    console.log("SETTING CRT")
+    // console.log("SETTING CRT")
     setCRT(isCRTOn)
   }, [isCRTOn])
 
@@ -467,7 +467,7 @@ function App() {
                   className="opacity-0 z-20 typing-input bg-transparent outline-none typing-text w-auto min-w-[1rem] flex-grow caret-transparent"
                   value={currentInput}
                   onChange={(e) => {
-                    console.log("setting current input to", e.target.value)
+                    // console.log("setting current input to", e.target.value)
                     setCurrentInput(e.target.value);
                     resizeInput(); // Resize input on change
                   }}
