@@ -18,12 +18,11 @@ const About = () => {
                             strong points being statistics (with a particular interest in copulas) and python for data science.
                         </p>
                         <p className="py-2 p">
-                            Within python I have made small projects with a variety of data-sciencey libraries, such as (in rough order from most to least knowledge): numpy, pandas, matplotlib, pytorch, pyvinecopulib, statsmodels, scikit-learn, tensorflow,
-                            NLTK, beautiful-soup.
+                            Within python I have made a variety of projects with a variety of data-sciencey libraries, such as: numpy, pandas, matplotlib, pytorch, pillow, opencv, beautiful-soup, etc.
 
                         </p>
                         <p className="pb-2 pt-0">
-                            Outside of python I have an ok knowledge of javascript (hopefully indicated by this website), R, and matlab, and experience with SQL for relational databases.
+                            Outside of python I have good experience with javascript (hopefully indicated by this website), and some experience with java, C  R, and matlab, and experience with SQL for relational databases.
 
                         </p>
                         <div className="py-2">
