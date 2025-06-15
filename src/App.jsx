@@ -60,9 +60,11 @@ function App() {
       "I hope you enjoy the site :)",
       asciiLine,
     ],
-    clear: "Terminal cleared.",
-    r: () => {
+    clear: () => setCommands([]),
+    r: (args) => {
+      // can take in args to act like a hidden echo after reset
       setCommands(defaultCommands);
+      return [<span className="terminal-highlight">{args.join(" ")}</span>];
     },
     echo: (args) => args.join(" "), // Return the echoed text
     ls: () => Object.keys(files), // List files in the home directory
@@ -232,9 +234,8 @@ function App() {
       const command = commandParts[0];
       const args = commandParts.slice(1); // Get any arguments
 
-      if (command.toLowerCase() == "clear") {
-        setCommands([]);
-      } else if (responses[command.toLowerCase()]) {
+      // if it is a valid command
+      if (responses[command.toLowerCase()]) {
         const response =
           typeof responses[command.toLowerCase()] === "function"
             ? responses[command.toLowerCase()](args) // Call function if it's a dynamic response
