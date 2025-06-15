@@ -60,7 +60,11 @@ function App() {
       "I hope you enjoy the site :)",
       asciiLine,
     ],
-    clear: () => setCommands([]),
+    clear: (args) => {
+      // take in any args to display as text
+      setCommands([]);
+      return [<span className="terminal-highlight">{args.join(" ")}</span>];
+    },
     r: (args) => {
       // can take in args to act like a hidden echo after reset
       setCommands(defaultCommands);
