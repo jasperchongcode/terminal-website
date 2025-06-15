@@ -101,6 +101,7 @@ v${version}`}</pre>
 
 export const hiddenResponses = {
   "1️⃣1️⃣": [<img key="eleven" className="image" src={devan_eleven} alt="Very attractive man" border="0" />],
+  "eleven": [<img key="eleven" className="image" src={devan_eleven} alt="Very attractive man" border="0" />],
     "labradoodle": [<img key="labradoodle" className="image" src={labradoodle} alt="Two labradoodles on a car" border="0" />],
     "akiflow": [<a key="akiflowReferral" target="_blank" href="https://web.akiflow.com/referral?name=SmFzcGVy&referral=7qCFeRNE9olhCymwEjz3iv81NsXiYU" className="link">akiflow.com/referral</a>]
 }
