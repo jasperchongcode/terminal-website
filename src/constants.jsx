@@ -7,7 +7,7 @@ export const asciiLine = <hr className='line' /> // to make reading files nicer
 export const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
 // lazy importing for speed
-const lazyImport = (path) => lazy(() => import(`./pages/${path}`));
+const lazyImport = (path) => lazy(() => import(`./pages/${path}.jsx`));
 
 const LazyPairTrading = lazyImport("pairtrading");
 const LazyLitClock = lazyImport("litclock");
