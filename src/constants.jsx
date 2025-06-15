@@ -9,12 +9,12 @@ export const terminalText = "> user@jasperchong-terminal:~$ "; // constant used 
 // lazy importing for speed
 const lazyImport = (path) => lazy(() => import(`./pages/${path}`));
 
-const LazyPairTrading = () => lazyImport("pairtrading");
-const LazyLitClock = () => lazyImport("litclock");
-const LazyAbout = () => lazyImport("about");
-const LazySummerResearch = () => lazyImport("summerresearch");
-const LazyDepthDetection = () => lazyImport("depthdetection");
-const LazyDiffuserDrawing = () => lazyImport("diffuserdrawing");
+const LazyPairTrading = lazyImport("pairtrading");
+const LazyLitClock = lazyImport("litclock");
+const LazyAbout = lazyImport("about");
+const LazySummerResearch = lazyImport("summerresearch");
+const LazyDepthDetection = lazyImport("depthdetection");
+const LazyDiffuserDrawing =lazyImport("diffuserdrawing");
 
 
 // files and a lazy loader promise for rendering

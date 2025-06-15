@@ -77,7 +77,7 @@ function App() {
       }
 
       if (files[filename.toLowerCase()]) {
-        const LazyComponent = files[filename.toLowerCase()]();
+        const LazyComponent = files[filename.toLowerCase()];
         return [
           <>
             <div>{asciiLine}</div>
@@ -95,7 +95,7 @@ function App() {
         ]; // Return the contents if file exists
       } else if (files[filename.toLowerCase() + ".txt"]) {
         // if its missing .txt, still valid
-        const LazyComponent = files[filename.toLowerCase() + ".txt"]();
+        const LazyComponent = files[filename.toLowerCase() + ".txt"];
         return [
           <>
             <div>{asciiLine}</div>
