@@ -3,7 +3,7 @@ import { Spinner } from './components';
 import { labradoodle, devan_eleven } from "./assets"
 
 //probably add 0.1.0 for a blog/page/big command, 0.0.1 for a noticeable chaneg, 1.0.0 for a major overhaul
-const version = "2.1.5"
+const version = "2.1.6"
 const asciiLine = <hr className='line' /> // to make reading files nicer 
 const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
@@ -100,7 +100,9 @@ v${version}`}</pre>
 ];
 
 const hiddenResponses = {
-  "1️⃣1️⃣": [<img key="eleven" className="image" src={devan_eleven} alt="Very attractive man" border="0" />]
+  "1️⃣1️⃣": [<img key="eleven" className="image" src={devan_eleven} alt="Very attractive man" border="0" />],
+    "labradoodle": [<img key="labradoodle" className="image" src={labradoodle} alt="Two labradoodles on a car" border="0" />],
+    "akiflow": [<a key="akiflowReferral" target="_blank" href="https://web.akiflow.com/referral?name=SmFzcGVy&referral=7qCFeRNE9olhCymwEjz3iv81NsXiYU" className="link">akiflow.com/referral</a>]
 }
 
 function App() {
@@ -210,7 +212,6 @@ function App() {
     "email": [<a key="email" href="mailto: contact@jasperchong.com" className="link">contact@jasperchong.com</a>],
     "website": [<a key="website" href="https://jasperchong.com" className="link">jasperchong.com</a>],
     "spotify": [<a key="spotify" target="_blank" href="https://open.spotify.com/user/7mqmetexug75muj9bosr7cd40?si=0f1f1ecfd5e84b4f&nd=1&dlsi=c73852fab98749db" className="link">spotify.com/jasperchong</a>],
-    "labradoodle": [<img key="labradoodle" className="image" src={labradoodle} alt="Two labradoodles on a car" border="0" />],
   };
 
   // Update the colour theme
