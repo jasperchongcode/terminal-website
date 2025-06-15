@@ -35,7 +35,7 @@ function App() {
       "Available commands:",
       "1. help - Show this help message.",
       "2. clear - Fully clear terminal.",
-      "3. r - Reload page to initial view.",
+      "3. r - Reset page to initial view.",
       "4. ls - List the contents of the current directory.",
       "5. read [filename] - Display the contents of the specified text file.",
       "6. linkedin - Get my LinkedIn profile.",
@@ -61,7 +61,9 @@ function App() {
       asciiLine,
     ],
     clear: "Terminal cleared.",
-    r: "Terminal reloaded.",
+    r: () => {
+      setCommands(defaultCommands);
+    },
     echo: (args) => args.join(" "), // Return the echoed text
     ls: () => Object.keys(files), // List files in the home directory
     read: (args) => {
@@ -232,8 +234,6 @@ function App() {
 
       if (command.toLowerCase() == "clear") {
         setCommands([]);
-      } else if (command.toLowerCase() == "r") {
-        location.reload();
       } else if (responses[command.toLowerCase()]) {
         const response =
           typeof responses[command.toLowerCase()] === "function"
