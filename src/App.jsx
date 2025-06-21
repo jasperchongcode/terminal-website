@@ -63,12 +63,20 @@ function App() {
     clear: (args) => {
       // take in any args to display as text
       setCommands([]);
-      return [<span className="terminal-highlight">{args.join(" ")}</span>];
+      return [
+        <span key="1" className="terminal-highlight">
+          {args.join(" ")}
+        </span>,
+      ];
     },
     r: (args) => {
       // can take in args to act like a hidden echo after reset
       setCommands(defaultCommands);
-      return [<span className="terminal-highlight">{args.join(" ")}</span>];
+      return [
+        <span key="1" className="terminal-highlight">
+          {args.join(" ")}
+        </span>,
+      ];
     },
     echo: (args) => args.join(" "), // Return the echoed text
     ls: () => Object.keys(files), // List files in the home directory
