@@ -44,6 +44,16 @@ const About = () => {
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-10">
+          <div
+            id="portrait"
+            className="md:w-[2000px]" //className="w-[340px] mt-5 md:mt-0 mb-5 md:mb-0 md:mr-10 md:w-[2000px]"
+          >
+            <label>
+              The Julia Fractal: Rendered by me in C
+              <img className="image" src={julia_fractal} alt="Fractal image" />
+            </label>
+          </div>
+
           <div className="flex flex-col gap-4">
             <div>
               <h1 className="font-bold text-base md:text-lg">Experience</h1>I am
@@ -72,16 +82,6 @@ const About = () => {
               academic trading models to changing desktop backgrounds to display
               the time (through book quotes) to using AI to improve my drawings.
             </div>
-          </div>
-
-          <div
-            id="portrait"
-            className="md:w-[2000px]" //className="w-[340px] mt-5 md:mt-0 mb-5 md:mb-0 md:mr-10 md:w-[2000px]"
-          >
-            <label>
-              Sesame and Nutmeg placeholder
-              <img className="image" src={julia_fractal} alt="labradoodle" />
-            </label>
           </div>
         </div>
 
