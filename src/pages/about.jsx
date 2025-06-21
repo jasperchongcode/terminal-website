@@ -43,7 +43,7 @@ const About = () => {
             </label>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row gap-10">
+        <div className="flex flex-col-reverse md:flex-row gap-10">
           <div
             id="portrait"
             className="md:w-[2000px]" //className="w-[340px] mt-5 md:mt-0 mb-5 md:mb-0 md:mr-10 md:w-[2000px]"
