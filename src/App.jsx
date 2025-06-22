@@ -6,8 +6,34 @@ import {
   themes,
   defaultCommands,
   hiddenResponses,
-  files,
 } from "./constants";
+import { lazy } from "react";
+
+// =============================================
+// = Defining here to not confuse fast refresh =
+// =============================================
+// lazy importing for speed
+const lazyImport = (path) => lazy(() => import(`./pages/${path}.jsx`));
+
+const LazyPairTrading = lazyImport("pairtrading");
+const LazyLitClock = lazyImport("litclock");
+const LazyAbout = lazyImport("about");
+const LazySummerResearch = lazyImport("summerresearch");
+const LazyDepthDetection = lazyImport("depthdetection");
+const LazyDiffuserDrawing = lazyImport("diffuserdrawing");
+const LazyBigComments = lazyImport("bigcomments");
+
+// files and a lazy loader promise for rendering
+// may be worth adding folders and things eventually as i write more
+const files = {
+  "about.txt": LazyAbout,
+  "pairtrading.txt": LazyPairTrading,
+  "litclock.txt": LazyLitClock,
+  "summerresearch.txt": LazySummerResearch,
+  "aidepthdetection.txt": LazyDepthDetection,
+  "diffuserdrawing.txt": LazyDiffuserDrawing,
+  "bigcomments.txt": LazyBigComments,
+};
 
 function App() {
   // If the cursor is blinking

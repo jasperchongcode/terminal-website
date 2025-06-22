@@ -36,6 +36,9 @@
     @apply text-red-500;
   } */
 
+  h1 {
+    @apply font-bold text-base md:text-lg
+  }
 
   /* .link {
     @apply text-blue-400 underline;

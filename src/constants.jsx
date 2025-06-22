@@ -1,31 +1,9 @@
 import { labradoodle, devan_eleven } from "./assets";
-import { lazy } from "react";
 
 //probably add 0.1.0 for a blog/page/big command, 0.0.1 for a noticeable chaneg, 1.0.0 for a major overhaul
-const version = "2.3.0";
+const version = "2.4.0";
 export const asciiLine = <hr className="line" />; // to make reading files nicer
 export const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
-
-// lazy importing for speed
-const lazyImport = (path) => lazy(() => import(`./pages/${path}.jsx`));
-
-const LazyPairTrading = lazyImport("pairtrading");
-const LazyLitClock = lazyImport("litclock");
-const LazyAbout = lazyImport("about");
-const LazySummerResearch = lazyImport("summerresearch");
-const LazyDepthDetection = lazyImport("depthdetection");
-const LazyDiffuserDrawing = lazyImport("diffuserdrawing");
-
-// files and a lazy loader promise for rendering
-// may be worth adding folders and things eventually as i write more
-export const files = {
-  "about.txt": LazyAbout,
-  "pairtrading.txt": LazyPairTrading,
-  "litclock.txt": LazyLitClock,
-  "summerresearch.txt": LazySummerResearch,
-  "aidepthdetection.txt": LazyDepthDetection,
-  "diffuserdrawing.txt": LazyDiffuserDrawing,
-};
 
 // Used to toggle between colour themes
 export const themes = {
