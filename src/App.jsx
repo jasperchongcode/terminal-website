@@ -22,6 +22,7 @@ const LazySummerResearch = lazyImport("summerresearch");
 const LazyDepthDetection = lazyImport("depthdetection");
 const LazyDiffuserDrawing = lazyImport("diffuserdrawing");
 const LazyBigComments = lazyImport("bigcomments");
+const LazyFractals = lazyImport("fractals");
 
 // files and a lazy loader promise for rendering
 // may be worth adding folders and things eventually as i write more
@@ -33,6 +34,7 @@ const files = {
   "aidepthdetection.txt": LazyDepthDetection,
   "diffuserdrawing.txt": LazyDiffuserDrawing,
   "bigcomments.txt": LazyBigComments,
+  "fractals.txt": LazyFractals,
 };
 
 function App() {
