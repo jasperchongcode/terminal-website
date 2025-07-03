@@ -28,13 +28,21 @@ const LazyFractals = lazyImport("fractals");
 // may be worth adding folders and things eventually as i write more
 const files = {
   "about.txt": LazyAbout,
-  "pairtrading.txt": LazyPairTrading,
-  "litclock.txt": LazyLitClock,
-  "summerresearch.txt": LazySummerResearch,
   "aidepthdetection.txt": LazyDepthDetection,
   "diffuserdrawing.txt": LazyDiffuserDrawing,
+  "summerresearch.txt": LazySummerResearch,
   "bigcomments.txt": LazyBigComments,
   "fractals.txt": LazyFractals,
+  "pairtrading.txt": LazyPairTrading,
+  "litclock.txt": LazyLitClock,
+};
+// Optional descriptions for extra info on files
+const file_descriptions = {
+  "diffuserdrawing.txt": "using AI to enhance ms-paint style image alterations",
+  "bigcomments.txt": "a vscode extension for comment readability",
+  "litclock.txt": "showing the time through book quotes",
+  "aidepthdetection.txt": "detecting squat form with AI",
+  "fractals.txt": "rendering escape-time fractals",
 };
 
 function App() {
@@ -107,7 +115,21 @@ function App() {
       ];
     },
     echo: (args) => args.join(" "), // Return the echoed text
-    ls: () => Object.keys(files), // List files in the home directory
+    ls: () =>
+      Object.keys(files).map((filename) => {
+        const description = file_descriptions?.[filename];
+        if (description) {
+          return (
+            <div key={`filename-${filename}`}>
+              {filename}{" "}
+              <span className="terminal-highlight italic text-xs md:text-sm">
+                - {description}
+              </span>
+            </div>
+          );
+        }
+        return <div key={`filename-${filename}`}>{filename}</div>;
+      }), // List files in the home directory
     read: (args) => {
       const filename = args[0]; // Get the filename from arguments
 
@@ -417,7 +439,7 @@ function App() {
   }, [isCRTOn]);
 
   return (
-    <div id="themer" className="efault-theme">
+    <div id="themer" className="default-theme">
       <div id="crt" className="crt">
         {/* Full window (above is to set the colour theme) */}
         <main className="px-6 pt-2 h-screen flex flex-col justify-start bg-inherit">
@@ -443,19 +465,24 @@ function App() {
             {/* Input Field as part of the terminal */}
             <p
               id="input-wrapper"
-              className="flex items-center"
+              // className="flex items-center"
               onClick={handleClick}
             >
-              <span className="mr-2">{terminalText}</span>
+              <span>{terminalText}</span>
               <span className="relative">
                 {/* Fake input for CRT effects */}
-                <span className="typing-text pointer-events-none z-10">
-                  {currentInput}
+                <span className="typing-text pointer-events-none z-10 overflow-hidden min-w-[1rem] whitespace-pre-wrap">
+                  {currentInput === "" // Replace the collapsing spaces with no break spaces and add trailing space (so it doesnt get collapsed by browser)
+                    ? "\u00A0"
+                    : currentInput
+                        .split("")
+                        .map((char) => (char == " " ? "\u00A0" : char))
+                        .join("") + "\u00A0"}
                 </span>
                 <input
                   id="command-input"
                   type="text"
-                  className="opacity-0 z-20 typing-input bg-transparent outline-none typing-text w-auto min-w-[1rem] flex-grow caret-transparent"
+                  className="opacity-0 z-20 typing-input bg-transparent outline-none typing-text w-auto min-w-[1rem] flex-grow caret-transparent absolute overflow-hidden whitespace-pre-wrap"
                   value={currentInput}
                   onChange={(e) => {
                     // console.log("setting current input to", e.target.value)
