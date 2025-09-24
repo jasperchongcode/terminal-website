@@ -1,7 +1,7 @@
-import { labradoodle, devan_eleven } from "./assets";
+import { labradoodle, devan_eleven, raw } from "./assets";
 
 //probably add 0.1.0 for a blog/page/big command, 0.0.1 for a noticeable chaneg, 1.0.0 for a major overhaul
-const version = "2.5.1";
+const version = "2.5.2";
 export const asciiLine = <hr className="line" />; // to make reading files nicer
 export const terminalText = "> user@jasperchong-terminal:~$ "; // constant used at the start of each line
 
@@ -102,6 +102,16 @@ export const hiddenResponses = {
       border="0"
     />,
   ],
+  raw: [
+    <img
+      key="raw"
+      className="image"
+      src={raw}
+      alt="Very attractive man in a RAW shirt"
+      border="0"
+    />,
+  ],
+
   labradoodle: [
     <img
       key="labradoodle"
